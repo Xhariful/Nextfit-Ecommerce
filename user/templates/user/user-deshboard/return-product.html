@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block content %}
+
+<!-- user profile dashboard start -->
+<div class="container mx-auto max-w-7xl">
+    <div class="flex ">
+        <!-- Left Sidebar -->
+        {% include "user/include/left-side.html" %}
+
+        <!-- right side  -->
+        <div class="lg:w-3/4  lg:m-8  shadow-lg">
+            <!-- return product start -->
+            <div class="tab-content lg:pt-6 lg:px-6 p-1">
+                <h1 class="text-2xl  font-bold mb-2">Return Product</h1>
+                <!-- Product List -->
+                <div class="space-y-4">
+                    <!-- Single Product Item -->
+                    <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <!-- Product Image -->
+                            <img src="https://via.placeholder.com/50" alt="Product Image"
+                                class="w-16 h-16 object-cover rounded-lg">
+                            <!-- Product Details -->
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Product Name</h3>
+                                <p class="text-gray-600">Price: $20.00</p>
+                            </div>
+                        </div>
+                        <!-- Quantity Selector -->
+                        <div class="flex items-center space-x-2">
+                            <label for="quantity" class="text-gray-600">Qty:</label>
+                            <input type="number" id="quantity" value="1" min="1"
+                                class="w-16 px-2 py-1 border rounded-lg text-center">
+                        </div>
+                    </div>
+
+                    <!-- Repeat above block for more products -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

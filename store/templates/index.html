@@ -1,0 +1,544 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block content %}
+<!-- this is headding section-->
+
+
+    <!-- carousel slide start -->
+    <div class="flex">
+        <!-- left side of carousel -->
+        <div class="hidden sm:block w-1/4">
+
+        </div>
+        <!-- main carousel -->
+        <div id="controls-carousel" class="relative w-full md:w-3/4 z-10  " data-carousel="slide">
+            <!-- Carousel wrapper -->
+            <div class="relative overflow-hidden w-full aspect-[21/9] ">
+                <!-- Item 1 -->
+                 {% for i in carousol %}
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img src="{{ i.img.url }}"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="...">
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- Slider controls -->
+            <button type="button"
+                class="absolute top-0 start-0 z-30 flex a items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-prev>
+                <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 1 1 5l4 4" />
+                    </svg>
+                    <span class="sr-only">Previous</span>
+                </span>
+            </button>
+            <button type="button"
+                class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                data-carousel-next>
+                <span
+                    class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30 group-hover:bg-white/50 dark:group-hover:bg-gray-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 9 4-4-4-4" />
+                    </svg>
+                    <span class="sr-only">Next</span>
+                </span>
+            </button>
+        </div>
+    </div>
+    <!-- carousel slide end -->
+
+    <!-- Flash Sale start-->
+    <div class="container mx-auto max-w-7xl  ">
+        <div class="lg:p-4 p-1">
+            <p class="lg:text-4xl text-xl font-semibold text-center text-black ">Flash Sale </p>
+        </div>
+        <div id="scroll-container"
+            class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-1 justify-items-center overflow-x-auto">
+            <!-- cards start -->
+            {% for i in product %}
+                <div class="lg:p-4 p-3 relative">
+                    <div
+                        class="w-full max-w-sm bg-white border border-gray-200 relative inline-block group rounded-lg shadow hover:bg-blue-100 ">
+                        <span class="thembg3 px-2 py-1 absolute top-0 left-0 text-xs rounded-md">
+                            5.5% OFF
+                        </span>
+                        <a href="{% url 'wishlist' slug=i.slug %}"
+                            class="thembg2 text-white text-center px-2 py-1 absolute top-0 right-0 text-xs rounded-md z-20 hidden group-hover:block m-2">
+                            <i class="w-8 h-8 text-2xl fa-solid fa-heart  "></i>
+                        </a>
+                        <div class="flex justify-center z-10 ">
+                            <a href="{% url 'product_detail' i.slug %}">
+                                <div class="w-full overflow-hidden  rounded-t-lg"> <!-- Set 1:1 aspect ratio -->
+                                    <img class="w-full aspect-square hover:scale-110 overflow-hidden hover:z-0 text-center   object-cover"
+                                        src="{{ i.img.url }}"
+                                        alt="product image" />
+                                </div>
+                            </a>
+                        </div>
+                        <div class="lg:p-4 p-2">
+                            <a href="{% url 'product_detail' i.slug %}">
+                                <span class="text-sm lg:text-md font-semibold tracking-tight text-black-900 text-center">
+                                     {{ i.name|truncatechars:28 }}
+                                </span>
+                            </a>
+                            <div class="flex items-center mt-2 justify-center mb-3">
+                                <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                    <!-- Star rating SVGs -->
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-gray-200" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                </div>
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                            </div>
+                            <div class="flex justify-center gap-4  text-sm font-bold text-black">
+                                {% with i.varition.first as first_variation %}
+                                    {% if first_variation %}
+                                        {% if first_variation.discount_price %}
+                                            <span>${{ first_variation.discount_price }}</span>
+                                            <span class="line-through">${{ first_variation.price }}</span>
+                                        {% else %}
+                                            <span>${{ first_variation.price }}</span>
+                                        {% endif %}
+                                    {% else %}
+                                        <span>No variations available</span>
+                                    {% endif %}
+                                {% endwith %}
+
+                                
+                            </div>
+                            <div class="flex items-center justify-center p-1">
+                                <a href="{% url 'product_detail' i.slug %}"
+                                    class="w-full text-white thembg1 focus:ring-1 focus:outline-none font-medium rounded-lg lg:text-xs text-xs lg:px-8 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-center ">Quick
+                                    View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- card end -->
+        </div>
+    </div>
+    <!-- Flash Sale end-->
+
+    <!-- offer banner start -->
+     <div class="container mx-auto max-w-7xl">
+        <div class="grid lg:grid-cols-3 grid-cols-1 gap-4 p-4">
+            <!-- offer -->
+             {% for i in banner %}
+                <div class="overflow-hidden">
+                    <a href="{% if i.url %}{{ i.url.url }}{% endif %}">
+                        <img class="aspect-video hover:scale-110" src="{{ i.img.url }}" alt="offer-1">
+                    </a>
+                </div>
+            {% endfor %}
+            {% comment %} <div class="overflow-hidden">
+                <a href="">
+                    <img class="aspect-video hover:scale-110" src="{% static 'assest/image/banner2.jpg' %}" alt="">
+                </a>
+            </div>
+            <div class="overflow-hidden">
+                <a href="">
+                    <img class="aspect-video hover:scale-110" src="{% static 'assest/image/banner3.jpg' %}" alt="">
+                </a>
+            </div> {% endcomment %}
+        </div>
+     </div>
+    <!-- offer banner end -->
+
+    <!-- Catagories Start -->
+    <section class="container mx-auto max-w-7xl ">
+        <div class="px-10 py-4 lg:text-4xl text-xl font-semibold text-center ">
+            <p class="">Categories</p>
+        </div>
+        <div class="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-7  lg:gap-4 gap-3  mx-4 lg:p-4 p-2 ">
+            <!-- Catagories -->
+             {% for i in categories %}
+                <div class="flex flex-col items-center bg-white hover:bg-blue-100 rounded-lg shadow-lg p-2">
+                    <img class="lg:w-32 md:w-32 w-20 lg:h-32  md:h-32 md:h-16 h-20 rounded-lg shadow-lg hover:scale-[.90]"
+                        src="{% if i.img %}{{ i.img.url }}{% else %}{% static 'assest/image/Categori.png' %}{% endif %}"
+                        alt="Bonnie image" />
+                    <h5 class="lg:h-16 md:14 lg:text-md md:text-md text-sm text-center 
+                            font-medium text-black p-3">{{ i.name }}</h5>
+                </div>
+            {% endfor %}
+            {% comment %} <div class="flex flex-col items-center bg-white hover:bg-blue-100 rounded-lg shadow-lg p-2">
+                <img class="lg:w-32 md:w-32 w-20 lg:h-32  md:h-32 md:h-16 h-20 rounded-lg shadow-lg hover:scale-[.90]"
+                    src="https://th.bing.com/th/id/OIP.2a05A8TL4vRrLTQmPs87fwHaGy?w=192&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    alt="Bonnie image" />
+                <h5 class="lg:h-16 md:14 lg:text-md md:text-md text-sm text-center 
+                        font-medium text-black p-1">Professional Audio Equipment</h5>
+            </div>
+            <div class="flex flex-col items-center bg-white hover:bg-blue-100 rounded-lg shadow-lg p-2">
+                <img class="lg:w-32 md:w-32 w-20 lg:h-32  md:h-32 md:h-16 h-20 rounded-lg shadow-lg hover:scale-[.90]"
+                    src="https://th.bing.com/th/id/OIP.2a05A8TL4vRrLTQmPs87fwHaGy?w=192&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    alt="Bonnie image" />
+                <h5 class="lg:h-16 md:14 lg:text-md md:text-md text-sm text-center 
+                        font-medium text-black p-1">Professional Audio Equipment</h5>
+            </div>
+            <div class="flex flex-col items-center bg-white hover:bg-blue-100 rounded-lg shadow-lg p-2">
+                <img class="lg:w-32 md:w-32 w-20 lg:h-32  md:h-32 md:h-16 h-20 rounded-lg shadow-lg hover:scale-[.90]"
+                    src="https://th.bing.com/th/id/OIP.2a05A8TL4vRrLTQmPs87fwHaGy?w=192&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    alt="Bonnie image" />
+                <h5 class="lg:h-16 md:14 lg:text-md md:text-md text-sm text-center 
+                        font-medium text-black p-1">Professional Audio Equipment</h5>
+            </div>
+            <div class="flex flex-col items-center bg-white hover:bg-blue-100 rounded-lg shadow-lg p-2">
+                <img class="lg:w-32 md:w-32 w-20 lg:h-32  md:h-32 md:h-16 h-20 rounded-lg shadow-lg hover:scale-[.90]"
+                    src="https://th.bing.com/th/id/OIP.2a05A8TL4vRrLTQmPs87fwHaGy?w=192&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    alt="Bonnie image" />
+                <h5 class="lg:h-16 md:14 lg:text-md md:text-md text-sm text-center 
+                        font-medium text-black p-1">Professional Audio Equipment</h5>
+            </div>
+            <div class="flex flex-col items-center bg-white hover:bg-blue-100 rounded-lg shadow-lg p-2">
+                <img class="lg:w-32 md:w-32 w-20 lg:h-32  md:h-32 md:h-16 h-20 rounded-lg shadow-lg hover:scale-[.90]"
+                    src="https://th.bing.com/th/id/OIP.2a05A8TL4vRrLTQmPs87fwHaGy?w=192&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    alt="Bonnie image" />
+                <h5 class="lg:h-16 md:14 lg:text-md md:text-md text-sm text-center 
+                        font-medium text-black p-1">Professional Audio Equipment</h5>
+            </div>
+            <div class="flex flex-col items-center bg-white hover:bg-blue-100 rounded-lg shadow-lg p-2">
+                <img class="lg:w-32 md:w-32 w-20 lg:h-32  md:h-32 md:h-16 h-20 rounded-lg shadow-lg hover:scale-[.90]"
+                    src="https://th.bing.com/th/id/OIP.2a05A8TL4vRrLTQmPs87fwHaGy?w=192&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                    alt="Bonnie image" />
+                <h5 class="lg:h-16 md:14 lg:text-md md:text-md text-sm text-center 
+                        font-medium text-black p-1">Professional Audio Equipment</h5>
+            </div> {% endcomment %}
+        </div>
+    </section>
+    <!-- Catagories End -->
+
+    <!-- day of the deal start-->
+    <div class="container mx-auto max-w-7xl">
+        <div class="ml-12 p-3">
+            <p class="lg:text-4xl text-xl font-semibold text-center">Day of The Deal</p>
+        </div>
+        <div class="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 justify-items-center p-2 ">
+            <!-- cards -->
+             {% for i in product %}
+             <div class="lg:p-4 p-3 relative">
+                <div
+                    class="w-full max-w-sm bg-white border border-gray-200 relative inline-block group rounded-lg shadow hover:bg-blue-100 ">
+                    <span class="thembg3 px-2 py-1 absolute top-0 left-0 text-xs rounded-md">
+                        5.5% OFF
+                    </span>
+                    <a href="{% url 'wishlist' slug=i.slug %}"
+                        class="thembg2 text-white text-center px-2 py-1 absolute top-0 right-0 text-xs rounded-md z-20 hidden group-hover:block m-2">
+                        <i class="w-8 h-8 text-2xl fa-solid fa-heart  "></i>
+                    </a>
+                    <div class="flex justify-center z-10 ">
+                        <a href="{% url 'product_detail' i.slug %}">
+                            <div class="w-full overflow-hidden  rounded-t-lg"> <!-- Set 1:1 aspect ratio -->
+                                <img class="w-full aspect-square hover:scale-110 overflow-hidden hover:z-0 text-center   object-cover"
+                                    src="{{ i.img.url }}"
+                                    alt="product image" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="lg:p-4 p-2">
+                        <a href="{% url 'product_detail' i.slug %}">
+                            <span class="text-sm lg:text-md font-semibold tracking-tight text-black-900 text-center">
+                                {{ i.name|truncatechars:26 }}
+                            </span>
+                        </a>
+                        <div class="flex items-center mt-2 justify-center mb-3">
+                            <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                <!-- Star rating SVGs -->
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-gray-200" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                            </div>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                        </div>
+                        <div class="flex justify-center gap-4  text-sm font-bold text-black">
+                            {% with i.varition.first as first_variation %}
+                                {% if first_variation %}
+                                    {% if first_variation.discount_price %}
+                                        <span>${{ first_variation.discount_price }}</span>
+                                        <span class="line-through">${{ first_variation.price }}</span>
+                                    {% else %}
+                                        <span>${{ first_variation.price }}</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span>No variations available</span>
+                                {% endif %}
+                            {% endwith %}
+
+                            
+                        </div>
+                        <div class="flex items-center justify-center p-1">
+                            <a href="{% url 'product_detail' i.slug %}"
+                                class="w-full text-white thembg1 focus:ring-1 focus:outline-none font-medium rounded-lg lg:text-xs text-xs lg:px-8 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-center ">Quick
+                                View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- day of the deal end-->
+
+    <!-- Just for You start -->
+    <div class="container mx-auto max-w-7xl">
+        <div class="ml-12 p-3">
+            <p class="lg:text-4xl text-xl font-semibold text-center">Just For You</p>
+        </div>
+        <div class="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 justify-items-center p-2  ">
+            <!-- cards -->
+             {% for i in product %}
+             <div class="lg:p-4 p-3 relative">
+                <div
+                    class="w-full max-w-sm bg-white border border-gray-200 relative inline-block group rounded-lg shadow hover:bg-blue-100 ">
+                    <span class="thembg3 px-2 py-1 absolute top-0 left-0 text-xs rounded-md">
+                        5.5% OFF
+                    </span>
+                    <a href="{% url 'wishlist' slug=i.slug %}"
+                        class="thembg2 text-white text-center px-2 py-1 absolute top-0 right-0 text-xs rounded-md z-20 hidden group-hover:block m-2">
+                        <i class="w-8 h-8 text-2xl fa-solid fa-heart  "></i>
+                    </a>
+                    <div class="flex justify-center z-10 ">
+                        <a href="{% url 'product_detail' i.slug %}">
+                            <div class="w-full overflow-hidden  rounded-t-lg"> <!-- Set 1:1 aspect ratio -->
+                                <img class="w-full aspect-square hover:scale-110 overflow-hidden hover:z-0 text-center   object-cover"
+                                    src="{{ i.img.url }}"
+                                    alt="product image" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="lg:p-4 p-2">
+                        <a href="{% url 'product_detail' i.slug %}">
+                            <span class="text-sm lg:text-md font-semibold tracking-tight text-black-900 text-center">
+                                {{ i.name|truncatechars:26 }}
+                            </span>
+                        </a>
+                        <div class="flex items-center mt-2 justify-center mb-3">
+                            <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                <!-- Star rating SVGs -->
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-gray-200" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                            </div>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                        </div>
+                        <div class="flex justify-center gap-4  text-sm font-bold text-black">
+                            {% with i.varition.first as first_variation %}
+                                {% if first_variation %}
+                                    {% if first_variation.discount_price %}
+                                        <span>${{ first_variation.discount_price }}</span>
+                                        <span class="line-through">${{ first_variation.price }}</span>
+                                    {% else %}
+                                        <span>${{ first_variation.price }}</span>
+                                    {% endif %}
+                                {% else %}
+                                    <span>No variations available</span>
+                                {% endif %}
+                            {% endwith %}
+
+                            
+                        </div>
+                        <div class="flex items-center justify-center p-1">
+                            <a href="{% url 'product_detail' i.slug %}"
+                                class="w-full text-white thembg1 focus:ring-1 focus:outline-none font-medium rounded-lg lg:text-xs text-xs lg:px-8 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-center ">Quick
+                                View</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% comment %} 
+            <div class="lg:p-4 p-3 hidden">
+                <div
+                    class="w-full max-w-sm bg-white border border-gray-200 relative rounded-lg shadow hover:bg-blue-100 ">
+                    <span class="bg-red-600 text-white px-2 py-1 absolute top-0 right-0 text-xs rounded-md">
+                        5.5% OFF
+                    </span>
+                    <div class="flex justify-center">
+                        <a href="product-details.html">
+                            <div class="w-full overflow-hidden hover:rounded-lg"> <!-- Set 1:1 aspect ratio -->
+                                <img class="w-full aspect-square hover:scale-110 overflow-hidden hover:z-0 text-center rounded-t-lg object-cover"
+                                    src="https://m.media-amazon.com/images/I/51vfkPUG9-L._AC_QL92_SH45_UL240_SR240,220_.jpg" />
+                            </div>
+                        </a>
+                    </div>
+                    <div class="lg:p-4 p-2">
+                        <a href="product-details.html">
+                            <span class="text-sm lg:text-md font-semibold tracking-tight text-black-900 text-center">
+                                Product Title : Ulanzi MT44 Extendable Vlog Tripod With 360° Ball Head – Black Color
+                            </span>
+                        </a>
+                        <div class="flex items-center mt-2 justify-center mb-3">
+                            <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                <!-- Star rating SVGs -->
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                                <svg class="lg:w-4 w-4 lg:h-4 text-gray-200" xmlns="http://www.w3.org/2000/svg"
+                                    fill="currentColor" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                </svg>
+                            </div>
+                            <span
+                                class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                        </div>
+                        <div class="flex justify-center gap-4  text-sm font-bold text-black">
+                            <span>$599</span>
+                            <span class="line-through">$699</span>
+                        </div>
+                        <div class="flex items-center justify-center p-1">
+                            <a href="product-details.html"
+                                class="w-full text-white thembg1 focus:ring-1 focus:outline-none font-medium rounded-lg lg:text-xs text-xs lg:px-8 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-center ">Quick
+                                View</a>
+                        </div>
+                    </div>
+                </div>
+            </div> {% endcomment %}
+        </div>
+        <div id="showMoreBtn"
+            class="fter:h-px my-4 flex items-center before:h-px before:flex-1  before:bg-gray-300 before:content-[''] after:h-px after:flex-1 after:bg-gray-300  after:content-['']">
+            <button type="button"
+                class="flex items-center rounded-full border border-gray-300 thembg1 px-3 py-2 text-center text-sm font-medium text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mr-1 h-4 w-4">
+                    <path fill-rule="evenodd"
+                        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                        clip-rule="evenodd" />
+                </svg>
+                Load More
+            </button>
+        </div>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const button = document.getElementById("showMoreBtn");
+                const hiddenDivs = document.querySelectorAll(".hidden");
+                let currentIndex = 0; // Start index
+                const batchSize = 5; // Number of divs to show per click
+
+                button.addEventListener("click", () => {
+                    let count = 0;
+
+                    // Show the next batch of divs
+                    for (let i = currentIndex; i < hiddenDivs.length && count < batchSize; i++, count++) {
+                        hiddenDivs[i].classList.remove("hidden");
+                    }
+
+                    // Update the current index
+                    currentIndex += count;
+
+                    // Hide button if all divs are shown
+                    if (currentIndex >= hiddenDivs.length) {
+                        button.style.display = "none";
+                    }
+                });
+            });
+        </script>
+
+
+
+    </div>
+    <!-- Just for You end -->
+
+    
+
+
+
+
+
+</body>
+
+</html>
+{% endblock content %}

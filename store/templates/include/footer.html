@@ -1,0 +1,60 @@
+{% load static %}
+<!-- fotter section start -->
+<footer class="thembg1 text-white py-8">
+    <div class="container mx-auto max-w-7xl">
+        <!-- Top Section -->
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8 mx-4">
+            <!-- Contact Us Section -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Contact Us</h3>
+                <p>Call us 11am-11pm (Everyday)</p>
+                <p>Phone: <a href="tel:+88017########" class="text-blue-400">+88017########</a></p>
+                <p>Location: Chittagong, Bangladesh</p>
+                <div class="mt-4">
+                    <p>Bkash (Personal): <a href="tel:+88017########" class="text-blue-400">+88017########</a></p>
+                    <p>Nagad (Personal): <a href="tel:+88017########" class="text-blue-400">+88017########</a></p>
+                    <p>Rocket (Personal): Not Available</p>
+                </div>
+            </div>
+
+            <!-- Information Section -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Information</h3>
+                <ul class="space-y-2">
+                    <li><a href="{% url "about_us" %}" class="hover:text-blue-400">About Us</a></li>
+                    <li><a href="{% url "privacypolicy" %}" class="hover:text-blue-400">Privacy Policy</a></li>
+                    <li><a href="{% url "termscondition" %}" class="hover:text-blue-400">Terms & Conditions</a></li>
+                    <li><a href="{% url "mission" %}" class="hover:text-blue-400">Our Mission</a></li>
+                    <li><a href="{% url "vission" %}" class="hover:text-blue-400">Our Vision</a></li>
+                </ul>
+            </div>
+
+            <!-- Customer Service Section -->
+            <div>
+                <h3 class="text-lg font-semibold mb-4">Customer Service</h3>
+                <ul class="space-y-2">
+                    <li><a href=" {% url 'contact_us' %} " class="hover:text-blue-400">Contact Us</a></li>
+                    <li><a href="#" class="hover:text-blue-400">Return Policy</a></li>
+                    <li><a href="#" class="hover:text-blue-400">Shipping & Delivery</a></li>
+                    <li><a href="#" class="hover:text-blue-400">Earn With Us</a></li>
+                    <li><a href="#" class="hover:text-blue-400">Sell on name</a></li>
+                    <li><a href="#" class="hover:text-blue-400">Buy Wholesale</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Bottom Section with Social Media Icons -->
+        <div class="mt-8 text-center text-white border-t-2">
+            <p>&copy; 2024 Eranian. All rights reserved.</p>
+            <div class="flex justify-center mt-4 space-x-4">
+                <a href="#" class="hover:text-red-500 text-2xl"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="hover:text-blue-400 text-2xl"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-blue-400 text-2xl"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-blue-400 text-2xl"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-blue-400 text-2xl"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="hover:text-pink-500 text-2xl"><i class="fab fa-tiktok"></i></a>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- fotter section end -->

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}contact-us{% endblock title %}
+{% block content %}
+
+<!-- contact us start -->
+<section>
+    <div class="container max-w-7xl mx-auto">
+        <p class="themcolor1 text-4xl font-semibold text-center p-4">Contact Us</p>
+        <div class="lg:flex  justify-center mx-auto">
+            <div class="lg:w-2/5 w-full p-8">
+                <div class="p-6 max-w-sm mx-auto rounded-lg shadow-lg">
+                    <div class="flex items-center justify-center mb-4 space-x-3">
+                        <img src="your-logo.png" alt="Logo" class="h-10 w-10 object-contain">
+                        <h1 class="text-2xl font-bold themcolor1">Site Name</h1>
+                    </div>
+                    <p class="text-black mb-2"><strong>Location:</strong> Dhaka</p>
+                    <p class="text-black mb-2"><strong>Phone:</strong> <a href="tel:0191818****"
+                            class="themcolor1">0191818****</a></p>
+                    <p class="text-black mb-4"><strong>Email:</strong> <a href="mailto:support@eranian.com.bd"
+                            class="themcolor1">support@eranian.com.bd</a></p>
+                    <a href="sharifulpc04@gmail.com" class="block text-center thembg1 text-white py-2 rounded-md">Send
+                        Message</a>
+                </div>
+            </div>
+            <div class="lg:w-3/5 w-full p-8 text-black ">
+                <p class="text-2xl">Got Any Questions?</p>
+                <p class="text-lg ">Use the form below to get in touch with the sales team</p>
+                <form action="" method="post" class="space-y-4 m-4">
+                    {% csrf_token %}
+                        <label class="block text-sm font-medium">Full Name</label>
+                        <input type="text" id="name" name="full_name"
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-0"
+                            placeholder="Your Name" required>
+                        <label class="block text-sm font-medium">Email</label>
+                        <input type="email" id="email" name="email"
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-0"
+                            placeholder="Your Email" required>
+                        <label  class="block text-sm font-medium">Phone</label>
+                        <input type="tel" id="phone" name="phone"
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-0"
+                            placeholder="Your Phone" required>
+                        <label class="block text-sm font-medium">Subject</label>
+                        <input type="text" name="subject"
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-0"
+                            placeholder="Subject" required>
+                        <label name="massage" for="massage" class="block text-sm font-medium">massage</label>
+                        <textarea  name="massage" rows="4"
+                            class="w-full mt-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-0"
+                            placeholder="Your Message" required></textarea>
+                        <button type="submit" class="w-64 thembg1 text-white py-2 px-4 rounded-md ">
+                            Submit
+                        </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- contact us end -->
+
+<!-- location i-frame -->
+<div class="p-6 w-full  mx-auto rounded-lg shadow-lg">
+    <h2 class="text-2xl lg:text-4xl font-bold themcolor1 mb-4">Our Location</h2>
+    <div class="aspect-w-16  h-96 rounded-md overflow-hidden shadow">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.795647109823!2d90.3671073154417!3d23.78057379375105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755c7bd89a57359%3A0x37d4201be8127e4e!2sDhaka!5e0!3m2!1sen!2sbd!4v1633428027171!5m2!1sen!2sbd"
+            width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full">
+        </iframe>
+    </div>
+</div>
+
+{% endblock content %}

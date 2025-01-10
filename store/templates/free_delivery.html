@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}free delivery{% endblock title %}
+{% block content %}
+
+<!-- free delivery section start -->
+<section>
+    <div class="container max-w-7xl mx-auto">
+        <div class="">
+            <p class="text-4xl font-semibold p-4">Free Delivery Product</p>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 p-1 justify-items-center mt-12">
+                <!-- card -->
+                {% for i in free_delivery %}
+                <div class="lg:p-4 p-3 relative">
+                    <div
+                        class="w-full max-w-sm bg-white border border-gray-200 relative inline-block group rounded-lg shadow hover:bg-blue-100 ">
+                        <span class="thembg3 px-2 py-1 absolute top-0 left-0 text-xs rounded-md">
+                            5.5% OFF
+                        </span>
+                        <a href="{% url 'wishlist' slug=i.slug %}"
+                            class="thembg2 text-white text-center px-2 py-1 absolute top-0 right-0 text-xs rounded-md z-20 hidden group-hover:block m-2">
+                            <i class="w-8 h-8 text-2xl fa-solid fa-heart  "></i>
+                        </a>
+                        <div class="flex justify-center z-10 ">
+                            <a href="{% url 'product_detail' i.slug %}">
+                                <div class="w-full overflow-hidden  rounded-t-lg"> <!-- Set 1:1 aspect ratio -->
+                                    <img class="w-full aspect-square hover:scale-110 overflow-hidden hover:z-0 text-center   object-cover"
+                                        src="{{ i.img.url }}"
+                                        alt="product image" />
+                                </div>
+                            </a>
+                        </div>
+                        <div class="lg:p-4 p-2">
+                            <a href="{% url 'product_detail' i.slug %}">
+                                <span class="text-sm lg:text-md font-semibold tracking-tight text-black-900 text-center">
+                                     {{ i.name|truncatechars:28 }}
+                                </span>
+                            </a>
+                            <div class="flex items-center mt-2 justify-center mb-3">
+                                <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                    <!-- Star rating SVGs -->
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                    <svg class="lg:w-4 w-4 lg:h-4 text-gray-200" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                    </svg>
+                                </div>
+                                <span
+                                    class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                            </div>
+                            <div class="flex justify-center gap-4  text-sm font-bold text-black">
+                                {% if i.discount_price %}
+                                <span>${{ i.discount_price }}</span>
+                                <span class="line-through">${{ i.price }}</span>
+                                {% else %}
+                                <span class="line-through">${{ i.price }}</span>
+                                {% endif %}
+                                
+                            </div>
+                            <div class="flex items-center justify-center p-1">
+                                <a href="{% url 'product_detail' i.slug %}"
+                                    class="w-full text-white thembg1 focus:ring-1 focus:outline-none font-medium rounded-lg lg:text-xs text-xs lg:px-8 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-center ">Quick
+                                    View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- card end -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- free delivery section end -->
+
+
+
+{% endblock content %}

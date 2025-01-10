@@ -1,0 +1,585 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+product-details
+{% endblock %}
+{% block content %}
+{% comment %}color size button disable{% endcomment %}
+<style>
+    /* Style for disabled size options */
+    /* Styles for size buttons */
+    .size-btn {
+        transition: all 0.3s ease;
+    }
+
+    .size-btn.disabled {
+        background-color: #f3f4f6;
+        /* Light gray */
+        color: #9ca3af;
+        /* Muted gray */
+        cursor: not-allowed;
+    }
+
+    .size-btn.thembg1 {
+        background-color: #004444;
+        /* Highlight */
+        color: #ffffff;
+    }
+</style>
+
+<!-- product-details start -->
+<div class="">
+    <div class="container max-w-7xl mx-auto px-4 py-8">
+        <div class="flex flex-wrap -mx-4">
+            <!-- Product Images -->
+            <div class="w-full lg:w-1/3 md:w-1/2 px-4 mb-8">
+                <div class="relative overflow-hidden rounded-lg shadow-md">
+                    <img src="{{ query.img.url }}" alt="Product"
+                        class="w-full aspect-square hover:scale-150 rounded-lg shadow-md overflow-hidden cursor-crosshair hover:z-0"
+                        id="mainImage" />
+                </div>
+                <div class="flex gap-4 py-4 justify-center overflow-x-auto">
+                    {% for i in query.product_image.all %}
+                    <img src="{{ i.img.url }}" alt="Thumbnail 1"
+                        class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                        onclick="changeImage(this.src)" />
+                    {% endfor %}
+                </div>
+            </div>
+
+            <script>
+                const image = document.getElementById('mainImage')
+
+                image.addEventListener('mousemove', (e) => {
+                    const { left, top, width, height } = image.getBoundingClientRect()
+                    const x = ((e.clientX - left) / width) * 100 // X-coordinate percentage
+                    const y = ((e.clientY - top) / height) * 100 // Y-coordinate percentage
+
+                    // Zoom into the specific point
+                    image.style.transformOrigin = `${x}% ${y}%`
+                    image.style.transform = 'scale(2)' // Adjust the zoom level as needed
+                })
+
+                image.addEventListener('mouseleave', () => {
+                    // Reset the zoom when the cursor leaves the image
+                    image.style.transformOrigin = 'center center'
+                    image.style.transform = 'scale(1)'
+                })
+            </script>
+
+            <!-- Product Details -->
+            <div class="w-full lg:w-2/3 md:w-1/2 px-4">
+                <h2 class="text-3xl font-bold mb-2">{{ query.name }}</h2>
+                <p class="text-gray-600 mb-4">SKU: {{ query.slug }}</p>
+
+                <div class="flex items-center mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="size-6 text-yellow-500">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="size-6 text-yellow-500">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="size-6 text-yellow-500">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="size-6 text-yellow-500">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                        class="size-6 text-yellow-500">
+                        <path fill-rule="evenodd"
+                            d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z"
+                            clip-rule="evenodd" />
+                    </svg>
+                    <span class="ml-2 text-gray-600">4.5 (120 reviews)</span>
+                </div>
+                <a class="text-gray-700 mb-6">{{ query.short_description|striptags|truncatechars:100 }}</a>
+
+                <form action="{% url 'add_to_cart' %}" method="post">
+                    {% csrf_token %}
+                    <div class="mb-4">
+                        <span id="product-old-price" class="text-2xl font-bold mr-2">$0</span>
+                        <span id="product-price" class="text-gray-500 line-through">$0</span>
+                    </div>
+                    <input type="hidden" name="product_id" value="{{ query.id }}" />
+
+                    
+                    <h2 class="text-lg font-semibold text-gray-800 mb-3">Color</h2>
+                    <div id="varition_color" class="grid lg:grid-cols-12 grid-cols-4 gap-4 mb-4">
+                        <!-- Color Buttons will be populated by JS -->
+                    </div>
+                  
+
+                    {% if variations_with_size %}
+                        <h2 class="text-lg font-semibold text-gray-800 mb-3">Select Size</h2>
+                    {% endif %}
+
+
+                    <div id="varition_size" class="grid lg:grid-cols-12 grid-cols-7 gap-4 mb-4">
+                        <!-- Size Buttons will be populated by JS -->
+                    </div>
+                    
+
+                    <!-- Quantity Button -->
+                    <h2 class="text-lg font-semibold text-gray-800 mb-1">Quantity</h2>
+                    <div class="flex items-center lg:space-x-6 md:space-x-6 space-x-2">
+                        <!-- Minus Button -->
+                        <button type="button"
+                            class="minus-btn lg:w-10 w-8 lg:h-10 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">-</button>
+
+                        <!-- Quantity Display -->
+                        <input type="text" name="quantity" value="1"
+                            class="quantity-display text-lg font-medium text-gray-800 w-12 text-center" readonly />
+
+                        <!-- Plus Button -->
+                        <button type="button"
+                            class="plus-btn lg:w-10 w-8 lg:h-10 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">+</button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 pt-4 px-4">
+                        <!-- Add to Cart Button -->
+                        <button type="submit"
+                            class="flex items-center text-center justify-center sm:justify-start px-12 py-2 thembg1 text-white text-xs font-medium rounded shadow focus:outline-none focus:ring-1 w-full sm:w-auto">
+                            <!-- Cart Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 6M7 13l-1.4 6m8.4-6l1.4 6M21 21H7m14-7h-4" />
+                            </svg>Add to Cart
+                        </button>
+                        <!-- Buy Now Button -->
+                        <a href="#"
+                            class="flex items-center justify-center sm:justify-start px-12 py-2 thembg1 text-white text-xs font-medium rounded shadow focus:outline-none focus:ring-1 w-full sm:w-auto">
+                            <!-- Shopping Bag Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 12h14M7 8h10l1.8 12H5.2L7 8zm3-6h4v4H8V2h4z" />
+                            </svg>Buy Now
+                        </a>
+                    </div>
+                </form>
+
+                {% comment %} <!-- Quantity Button -->
+                <h2 class="text-lg font-semibold text-gray-800 mb-1">Quantity</h2>
+                <div class="flex items-center lg:space-x-6 md:space-x-6 space-x-2">
+                    <!-- Minus Button -->
+                    <button
+                        class="minus-btn lg:w-10 w-8 lg:h-10 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">-</button>
+
+                    <!-- Quantity Display -->
+                    <span class="quantity-display text-lg font-medium text-gray-800">1</span>
+
+                    <!-- Plus Button -->
+                    <button
+                        class="plus-btn lg:w-10 w-8 lg:h-10 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">+</button>
+                    <!-- quantity button js -->
+                    <script defer>
+                        let quantity = 1
+
+                        document.addEventListener('DOMContentLoaded', () => {
+                            // Handle the minus button click
+                            document.querySelector('.minus-btn').addEventListener('click', () => {
+                                if (quantity > 1) {
+                                    quantity--
+                                    document.querySelector('.quantity-display').textContent = quantity
+                                }
+                            })
+
+                            // Handle the plus button click
+                            document.querySelector('.plus-btn').addEventListener('click', () => {
+                                quantity++
+                                document.querySelector('.quantity-display').textContent = quantity
+                            })
+                        })
+                    </script>
+                </div> {% endcomment %}
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Key Features:</h3>
+                    <ul class="list-disc list-inside text-gray-700">
+                        <li>Industry-leading noise cancellation</li>
+                        <li>30-hour battery life</li>
+                        <li>Touch sensor controls</li>
+                        <li>Speak-to-chat technology</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- image change js -->
+    <script>
+        function changeImage(src) {
+            document.getElementById('mainImage').src = src
+        }
+    </script>
+</div>
+<div class="border border-gray-300 max-w-6xl mx-auto mt-6 p-4 justify-items-center pb-2">
+    <!-- Nav Tabs -->
+    <div class="flex border-b border-gray-200 text-black">
+        <button
+            class="tab-btn px-4 py-2 lg:text-sm md:text-sm text-xs font-medium border-b-2 border-transparent focus:outline-none"
+            data-tab="description">Description</button>
+        <button
+            class="tab-btn px-4 py-2 lg:text-sm md:text-sm text-xs font-medium border-b-2 border-transparent focus:outline-none"
+            data-tab="additional-info">Additional Information</button>
+        <button
+            class="tab-btn px-4 py-2 lg:text-sm md:text-sm text-xs font-medium border-b-2 border-transparent focus:outline-none"
+            data-tab="shipping-returns">Shipping & Returns</button>
+    </div>
+    <!-- Tab Content -->
+    <div class="mt-4">
+        <!-- Description Tab -->
+        <div class="tab-content hidden" id="description">
+            <p class="text-gray-700 text-sm">{{ query.description|safe }}</p>
+        </div>
+
+        <!-- Additional Information Tab -->
+        <div class="tab-content hidden" id="additional-info">
+            <p class="text-gray-700 text-sm">{{ query.details_description|safe }}</p>
+        </div>
+
+        <!-- Shipping & Returns Tab -->
+        <div class="tab-content hidden" id="shipping-returns">
+            <p class="text-gray-700 text-sm">Shipping and Returns policy includes delivery options, return window, and
+                related information.</p>
+        </div>
+    </div>
+</div>
+
+
+   <!-- Related Product start-->
+   <div class="container mx-auto max-w-7xl">
+    <div class="ml-12 p-3">
+        <p class="lg:text-4xl text-xl font-semibold ">Related Product</p>
+    </div>
+    <div class="grid lg:grid-cols-5 md:grid-cols-3 grid-cols-2 justify-items-center p-2 ">
+        <!-- cards -->
+         {% for i in product %}
+         <div class="lg:p-4 p-3 relative">
+            <div
+                class="w-full max-w-sm bg-white border border-gray-200 relative inline-block group rounded-lg shadow hover:bg-blue-100 ">
+                <span class="thembg3 px-2 py-1 absolute top-0 left-0 text-xs rounded-md">
+                    5.5% OFF
+                </span>
+                <a href="{% url 'wishlist' slug=i.slug %}"
+                    class="thembg2 text-white text-center px-2 py-1 absolute top-0 right-0 text-xs rounded-md z-20 hidden group-hover:block m-2">
+                    <i class="w-8 h-8 text-2xl fa-solid fa-heart  "></i>
+                </a>
+                <div class="flex justify-center z-10 ">
+                    <a href="{% url 'product_detail' i.slug %}">
+                        <div class="w-full overflow-hidden  rounded-t-lg"> <!-- Set 1:1 aspect ratio -->
+                            <img class="w-full aspect-square hover:scale-110 overflow-hidden hover:z-0 text-center   object-cover"
+                                src="{{ i.img.url }}"
+                                alt="product image" />
+                        </div>
+                    </a>
+                </div>
+                <div class="lg:p-4 p-2">
+                    <a href="{% url 'product_detail' i.slug %}">
+                        <span class="text-sm lg:text-md font-semibold tracking-tight text-black-900 text-center">
+                             {{ i.name|truncatechars:28 }}
+                        </span>
+                    </a>
+                    <div class="flex items-center mt-2 justify-center mb-3">
+                        <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                            <!-- Star rating SVGs -->
+                            <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                            </svg>
+                            <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                            </svg>
+                            <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                            </svg>
+                            <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                            </svg>
+                            <svg class="lg:w-4 w-4 lg:h-4 text-gray-200" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                            </svg>
+                        </div>
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                    </div>
+                    <div class="flex justify-center gap-4  text-sm font-bold text-black">
+                        {% with i.varition.first as first_variation %}
+                            {% if first_variation %}
+                                {% if first_variation.discount_price %}
+                                    <span>${{ first_variation.discount_price }}</span>
+                                    <span class="line-through">${{ first_variation.price }}</span>
+                                {% else %}
+                                    <span>${{ first_variation.price }}</span>
+                                {% endif %}
+                            {% else %}
+                                <span>No variations available</span>
+                            {% endif %}
+                        {% endwith %}
+
+                        
+                    </div>
+                    <div class="flex items-center justify-center p-1">
+                        <a href="{% url 'product_detail' i.slug %}"
+                            class="w-full text-white thembg1 focus:ring-1 focus:outline-none font-medium rounded-lg lg:text-xs text-xs lg:px-8 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-center ">Quick
+                            View</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+<!-- Related Product end-->
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const variations = JSON.parse('{{ variations_json|escapejs }}')
+
+        let selectedColor = null
+        let selectedSize = null
+
+        // Function to update the price based on selected size and color
+        function updatePrice() {
+            const selectedVariation = variations.find((variation) => {
+                const colorMatch = selectedColor ? variation.color === selectedColor : true
+                const sizeMatch = selectedSize ? variation.size === selectedSize : true
+                return colorMatch && sizeMatch
+            })
+
+            const priceElement = document.getElementById('product-price')
+            const oldPriceElement = document.getElementById('product-old-price')
+
+            if (selectedVariation) {
+                priceElement.textContent = `$${selectedVariation.price.toFixed(2)}`;
+                oldPriceElement.textContent = selectedVariation.discount_price ? `$${selectedVariation.discount_price.toFixed(2)}` : '';
+            } else {
+                priceElement.textContent = 'Please select valid options.';
+                oldPriceElement.textContent = '';
+            }
+        }
+
+        function updateSizeAvailability(selectedColor) {
+            const availableSizes = variations.filter((variation) => variation.color === selectedColor).map((variation) => variation.size)
+            let firstSize = false;
+            document.querySelectorAll('.size-radio').forEach((input) => {
+                const size = input.value
+                const sizeBtn = input.closest('label').querySelector('.size-btn')
+
+                if (availableSizes.includes(size)) {
+                    sizeBtn.classList.remove('disabled', 'bg-gray-300', 'text-gray-500');
+                    sizeBtn.classList.add('bg-gray-200', 'text-gray-800');
+                    input.disabled = false;
+
+                    if (firstSize === false) {
+                        sizeBtn.classList.add('thembg1', 'text-white');
+                        input.checked = true;
+                        firstSize = true;
+                        selectedSize = size;
+                    }
+                } else {
+                    sizeBtn.classList.add('disabled', 'bg-gray-300', 'text-gray-500');
+                    sizeBtn.classList.remove('bg-gray-200', 'thembg1', 'text-white', 'text-gray-800');
+                    input.disabled = true;
+                    input.checked = false;
+                }
+            })
+
+            if (selectedSize && !availableSizes.includes(selectedSize)) {
+                selectedSize = null
+                document.querySelectorAll('.size-btn').forEach((btn) => btn.classList.remove('thembg1', 'text-white'))
+            }
+
+            updatePrice()
+        }
+
+        function setSelectedSizeForColor() {
+            if (selectedColor && selectedSize) {
+                const availableSizes = variations.filter((variation) => variation.color === selectedColor).map((variation) => variation.size)
+
+                if (availableSizes.includes(selectedSize)) {
+                    document.querySelectorAll('.size-btn').forEach((btn) => btn.classList.remove('thembg1', 'text-white'))
+                    const selectedBtn = document.querySelector(`input[name="size"][value="${selectedSize}"]`).closest('label')
+                    selectedBtn.querySelector('.size-btn').classList.add('thembg1', 'text-white')
+                    selectedBtn.checked = true;
+
+                } else {
+                    selectedSize = null
+                }
+            }
+        }
+
+        // it is size section
+        const sizeContainer = document.getElementById('varition_size')
+        const uniqueSizes = [...new Set(variations.map((v) => v.size).filter((size) => size !== 'N/A'))]
+        if (uniqueSizes.length > 0) {
+            uniqueSizes.forEach((size) => {
+                const label = document.createElement('label')
+                label.className = 'size-label inline-flex items-center cursor-pointer space-x-2'
+
+                const input = document.createElement('input')
+                input.type = 'radio'
+                input.name = 'size'
+                input.value = size
+                input.className = 'hidden size-radio'
+
+                const customDiv = document.createElement('div')
+                customDiv.className = 'size-btn px-4 py-2 bg-gray-200 rounded text-gray-800 font-medium transition-all'
+                customDiv.textContent = size
+
+                label.appendChild(input)
+                label.appendChild(customDiv)
+                sizeContainer.appendChild(label)
+
+                input.addEventListener('change', function () {
+                    document.querySelectorAll('.size-btn').forEach((btn) => btn.classList.remove('thembg1', 'text-white'))
+                    document.querySelectorAll('.size-radio').forEach((btn) => btn.checked = false);
+                    customDiv.classList.add('thembg1', 'text-white')
+                    input.checked = true;
+                    selectedSize = size
+                    updatePrice()
+                })
+            })
+        } else {
+            sizeContainer.textContent = ''
+        }
+
+        // it is color section
+        const colorContainer = document.getElementById('varition_color')
+        const uniqueColors = [...new Set(variations.map((v) => v.color).filter((color) => color !== 'N/A'))]
+        if (uniqueColors.length > 0) {
+            let firstColor = false;
+            uniqueColors.forEach((color) => {
+                const label = document.createElement('label')
+                label.className = 'color-label inline-flex items-center cursor-pointer space-x-2'
+
+                const input = document.createElement('input')
+                input.type = 'radio'
+                input.name = 'color'
+                input.value = color
+                input.className = 'hidden color-radio'
+
+                const customDiv = document.createElement('div')
+                customDiv.className = 'color-btn px-2 py-2 bg-gray-200 rounded text-gray-800 font-medium transition-all'
+                customDiv.textContent = color
+
+                if (firstColor === false) {
+                    customDiv.classList.add("thembg1", "text-white");
+                    input.checked = true;
+                    firstColor = true;
+                    selectedColor = color
+                    updateSizeAvailability(selectedColor)
+                    setSelectedSizeForColor()
+                }
+
+                label.appendChild(input)
+                label.appendChild(customDiv)
+                colorContainer.appendChild(label)
+
+                input.addEventListener('change', function () {
+                    document.querySelectorAll('.color-btn').forEach((btn) => btn.classList.remove('thembg1', 'text-white'));
+                    document.querySelectorAll('.color-radio').forEach((btn) => btn.checked = false);
+
+                    customDiv.classList.add('thembg1', 'text-white');
+                    input.checked = true;
+                    selectedColor = color
+
+                    updateSizeAvailability(selectedColor)
+                    setSelectedSizeForColor()
+                })
+            })
+        } else {
+            colorContainer.textContent = 'Color options are not available.'
+        }
+
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const tabButtons = document.querySelectorAll('.tab-btn')
+        const tabContents = document.querySelectorAll('.tab-content')
+
+        // Show the first tab by default
+        tabButtons[0].classList.add('text-blue-500', 'border-blue-500')
+        tabContents[0].classList.remove('hidden')
+
+        tabButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const target = button.getAttribute('data-tab')
+
+                // Remove active state from all buttons and hide all content
+                tabButtons.forEach((btn) => {
+                    btn.classList.remove('text-blue-500', 'border-blue-500')
+                })
+                tabContents.forEach((content) => {
+                    content.classList.add('hidden')
+                })
+
+                // Add active state to the clicked button and show corresponding content
+                button.classList.add('text-blue-500', 'border-blue-500')
+                document.getElementById(target).classList.remove('hidden')
+            })
+        })
+    })
+</script>
+<!-- product-details end -->
+
+<script>
+    let quantity = 1
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const quantityDisplay = document.querySelector('.quantity-display')
+
+        // Handle the minus button click
+        document.querySelector('.minus-btn').addEventListener('click', () => {
+            if (quantity > 1) {
+                quantity--
+                quantityDisplay.value = quantity // Use value to update input field
+            }
+        })
+
+        // Handle the plus button click
+        document.querySelector('.plus-btn').addEventListener('click', () => {
+            quantity++
+            quantityDisplay.value = quantity // Use value to update input field
+        })
+    })
+</script>
+{% endblock %}

@@ -1,0 +1,618 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block content %}
+
+<!-- user profile dashboard start -->
+<div class="container mx-auto max-w-7xl">
+    <div class="flex ">
+        <!-- Left Sidebar -->
+        {% include "user/include/left-side.html" %}
+
+        <!-- Right Content -->
+        <div class="lg:w-3/4  overflow-hidden container lg:m-8  shadow-lg">
+            <!-- Tabs Content -->
+            <div class="tab-content hidden lg:pt-6 lg:px-6 p-1">
+                <h1 class="text-2xl  font-bold mb-2">Purchase History</h1>
+                <div class="">
+                    <!-- Cart History Table -->
+                    <table class="min-w-full table-auto text-left border-collapse">
+                        <thead>
+                            <tr class="bg-gray-100">
+                                <th class="px-6 py-3 text-sm font-medium text-gray-600">Product</th>
+                                <th class="px-6 py-3 text-sm font-medium text-gray-600">Price</th>
+                                <th class="px-6 py-3 text-sm font-medium text-gray-600">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Example Product Row -->
+                            <tr class="border-b ">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center space-x-4">
+                                        <figure class="w-20 h-20">
+                                            <a href="">
+                                                <img src="/media/ProductImg/foldable-corner-shelf-with-tripod-base-3.jpeg"
+                                                    alt="Product image" class="w-full h-full object-cover rounded-md">
+                                            </a>
+                                        </figure>
+                                        <h3 class="text-sm font-semibold">
+                                            <a href="" class="text-gray-800 hover:text-blue-600">Black Carbon Steel
+                                                4-Tier
+                                                Foldable Corner Shelf</a>
+                                        </h3>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-800">৳3150</td>
+                                <td class="px-6 py-4">
+                                    <a href="#" class="text-red-500 hover:text-red-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 ml-3" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                        <p>Delete</p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <!-- Example Product Row -->
+                            <tr class="border-b ">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center space-x-4">
+                                        <figure class="w-20 h-20">
+                                            <a href="">
+                                                <img src="/media/ProductImg/foldable-corner-shelf-with-tripod-base-3.jpeg"
+                                                    alt="Product image" class="w-full h-full object-cover rounded-md">
+                                            </a>
+                                        </figure>
+                                        <h3 class="text-sm font-semibold">
+                                            <a href="" class="text-gray-800 hover:text-blue-600">Black Carbon Steel
+                                                4-Tier
+                                                Foldable Corner Shelf</a>
+                                        </h3>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-800">৳3150</td>
+                                <td class="px-6 py-4">
+                                    <a href="#" class="text-red-500 hover:text-red-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 ml-3" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                        <p>Delete</p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <!-- Example Product Row -->
+                            <tr class="border-b ">
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center space-x-4">
+                                        <figure class="w-20 h-20">
+                                            <a href="">
+                                                <img src="/media/ProductImg/foldable-corner-shelf-with-tripod-base-3.jpeg"
+                                                    alt="Product image" class="w-full h-full object-cover rounded-md">
+                                            </a>
+                                        </figure>
+                                        <h3 class="text-sm font-semibold">
+                                            <a href="" class="text-gray-800 hover:text-blue-600">Black Carbon Steel
+                                                4-Tier
+                                                Foldable Corner Shelf</a>
+                                        </h3>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 text-sm text-gray-800">৳3150</td>
+                                <td class="px-6 py-4">
+                                    <a href="#" class="text-red-500 hover:text-red-600">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 ml-3" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                        </svg>
+                                        <p>Delete</p>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <hr class="my-4">
+                </div>
+            </div>
+            <div class="tab-content hidden lg:pt-6 lg:px-6 p-1">
+                <h1 class="text-2xl  font-bold mb-2">Wishlist</h1>
+                <div class="lg:p-6 bg-gray-100 min-h-screen">
+                    <!-- Product List -->
+                    <div class="shadow overflow-x-auto border-b border-gray-200 sm:rounded-lg bg-white">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead>
+                                <tr>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex cursor-pointer">
+                                            <span class="mr-2">PRODUCT
+                                                NAME</span>
+                                        </div>
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex cursor-pointer">
+                                            <span class="mr-2">SIZE</span>
+                                        </div>
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex cursor-pointer">
+                                            <span class="mr-2">COLOR</span>
+                                        </div>
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex cursor-pointer">
+                                            <span class="mr-2">PRICE</span>
+                                        </div>
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex cursor-pointer">
+                                            <span class="mr-2">QUANTITY</span>
+                                        </div>
+                                    </th>
+                                    <th
+                                        class="px-6 py-3 bg-gray-50 text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+                                        <div class="flex cursor-pointer">
+                                            <span class="mr-2">ACTION</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>Apple MacBook Pro 13</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>45</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>White</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>TK: 899</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <div class=" flex items-center lg:space-x-1 md:space-x-1 space-x-1">
+                                            <!-- Minus Button -->
+                                            <button
+                                                class="minus-btn lg:w-8 w-8  lg:h-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                -
+                                            </button>
+
+                                            <!-- Quantity Display -->
+                                            <span class="quantity-display text-lg font-medium text-gray-800">1</span>
+
+                                            <!-- Plus Button -->
+                                            <button
+                                                class="plus-btn lg:w-8 w-8  lg:h-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                +
+                                            </button>
+                                        </div>
+                                        <!-- quantity button js -->
+                                        <script defer>
+                                            let quantity = 1;
+                                            document.addEventListener("DOMContentLoaded", () => {
+                                                // Handle the minus button click
+                                                document.querySelector('.minus-btn').addEventListener('click', () => {
+                                                    if (quantity > 1) {
+                                                        quantity--;
+                                                        document.querySelector('.quantity-display').textContent = quantity;
+                                                    }
+                                                });
+                                                // Handle the plus button click
+                                                document.querySelector('.plus-btn').addEventListener('click', () => {
+                                                    quantity++;
+                                                    document.querySelector('.quantity-display').textContent = quantity;
+                                                });
+                                            });
+                                        </script>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <div class="flex space-x-4">
+                                            <a href="#" class="text-red-500 hover:text-red-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 ml-3"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                                <p>Delete</p>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>Apple MacBook Pro 13</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>45</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>White</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>TK: 899</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <div class=" flex items-center lg:space-x-1 md:space-x-1 space-x-1">
+                                            <!-- Minus Button -->
+                                            <button
+                                                class="minus-btn lg:w-8 w-8  lg:h-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                -
+                                            </button>
+
+                                            <!-- Quantity Display -->
+                                            <span class="quantity-display text-lg font-medium text-gray-800">1</span>
+
+                                            <!-- Plus Button -->
+                                            <button
+                                                class="plus-btn lg:w-8 w-8  lg:h-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                +
+                                            </button>
+                                        </div>
+                                        <!-- quantity button js -->
+                                        <script defer>
+                                            let quantity = 1;
+
+                                            document.addEventListener("DOMContentLoaded", () => {
+                                                // Handle the minus button click
+                                                document.querySelector('.minus-btn').addEventListener('click', () => {
+                                                    if (quantity > 1) {
+                                                        quantity--;
+                                                        document.querySelector('.quantity-display').textContent = quantity;
+                                                    }
+                                                });
+
+                                                // Handle the plus button click
+                                                document.querySelector('.plus-btn').addEventListener('click', () => {
+                                                    quantity++;
+                                                    document.querySelector('.quantity-display').textContent = quantity;
+                                                });
+                                            });
+                                        </script>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <div class="flex space-x-4">
+                                            <a href="#" class="text-red-500 hover:text-red-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 ml-3"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                                <p>Delete</p>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>Apple MacBook Pro 13</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>45</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>White</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>TK: 899</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <div class=" flex items-center lg:space-x-1 md:space-x-1 space-x-1">
+                                            <!-- Minus Button -->
+                                            <button
+                                                class="minus-btn lg:w-8 w-8  lg:h-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                -
+                                            </button>
+
+                                            <!-- Quantity Display -->
+                                            <span class="quantity-display text-lg font-medium text-gray-800">1</span>
+
+                                            <!-- Plus Button -->
+                                            <button
+                                                class="plus-btn lg:w-8 w-8  lg:h-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                +
+                                            </button>
+                                        </div>
+                                        <!-- quantity button js -->
+                                        <script defer>
+                                            let quantity = 1;
+
+                                            document.addEventListener("DOMContentLoaded", () => {
+                                                // Handle the minus button click
+                                                document.querySelector('.minus-btn').addEventListener('click', () => {
+                                                    if (quantity > 1) {
+                                                        quantity--;
+                                                        document.querySelector('.quantity-display').textContent = quantity;
+                                                    }
+                                                });
+
+                                                // Handle the plus button click
+                                                document.querySelector('.plus-btn').addEventListener('click', () => {
+                                                    quantity++;
+                                                    document.querySelector('.quantity-display').textContent = quantity;
+                                                });
+                                            });
+                                        </script>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <div class="flex space-x-4">
+                                            <a href="#" class="text-red-500 hover:text-red-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 ml-3"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                                <p>Delete</p>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>Apple MacBook Pro 13</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>45</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>White</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <p>TK: 899</p>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <div class=" flex items-center lg:space-x-1 md:space-x-1 space-x-1">
+                                            <!-- Minus Button -->
+                                            <button
+                                                class="minus-btn lg:w-8 w-8  lg:h-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                -
+                                            </button>
+
+                                            <!-- Quantity Display -->
+                                            <span class="quantity-display text-lg font-medium text-gray-800">1</span>
+
+                                            <!-- Plus Button -->
+                                            <button
+                                                class="plus-btn lg:w-8 w-8  lg:h-8 h-8 flex items-center justify-center bg-gray-200 rounded-full text-gray-700 text-lg font-bold hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                                +
+                                            </button>
+                                        </div>
+                                        <!-- quantity button js -->
+                                        <script defer>
+                                            let quantity = 1;
+
+                                            document.addEventListener("DOMContentLoaded", () => {
+                                                // Handle the minus button click
+                                                document.querySelector('.minus-btn').addEventListener('click', () => {
+                                                    if (quantity > 1) {
+                                                        quantity--;
+                                                        document.querySelector('.quantity-display').textContent = quantity;
+                                                    }
+                                                });
+
+                                                // Handle the plus button click
+                                                document.querySelector('.plus-btn').addEventListener('click', () => {
+                                                    quantity++;
+                                                    document.querySelector('.quantity-display').textContent = quantity;
+                                                });
+                                            });
+                                        </script>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5">
+                                        <div class="flex space-x-4">
+                                            <a href="#" class="text-red-500 hover:text-red-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 mr-1 ml-3"
+                                                    fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                                </svg>
+                                                <p>Delete</p>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--  Products Button -->
+                    <div class="flex mt-6 p-1 text-center justify-between">
+                        <button class="md:px-6 px-3 md:py-2 py-1.5 thembg1 text-white font-semibold rounded-lg shadow ">
+                            Add More...
+                        </button>
+                        <button class="px-6 py-2 thembg1 text-white font-semibold rounded-lg shadow ">
+                            Order Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content hidden lg:pt-6 lg:px-6 p-1">
+                <h1 class="text-2xl  font-bold mb-2">My Review</h1>
+                <div class="mt-4 min-w-0 flex-1 space-y-4 sm:mt-0">
+                    <p class="text-base font-normal text-gray-500 dark:text-gray-400">My old IMAC was from 2013.
+                        This replacement was well needed. Very fast, and the colour matches my office set up
+                        perfectly. The display is out of this world and I’m very happy with this purchase.</p>
+
+                    <div class="flex items-center gap-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Was it helpful to you?</p>
+                        <div class="flex items-center">
+                            <input id="reviews-radio-1" type="radio" value="" name="reviews-radio"
+                                class="h-4 w-4 border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
+                            <label for="reviews-radio-1"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Yes: 3 </label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="reviews-radio-2" type="radio" value="" name="reviews-radio"
+                                class="h-4 w-4 border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
+                            <label for="reviews-radio-2"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No: 0 </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content hidden lg:pt-6 lg:px-6 p-1">
+                <h1 class="text-2xl  font-bold mb-2">Manage Profile</h1>
+                <div class="profile">
+                    <div class="flex justify-between items-center mb-5">
+                        <div class="w-1/2">
+                            <img class="rounded-lg" src="/media/no_img.png" style="height: 100px;">
+                        </div>
+                        <div class="w-1/2 text-right">
+                            <a class="btn buttoncolor text-white px-4 py-2 rounded" href="Profile-edit.html">Edit
+                                Profile</a>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <!-- Name -->
+                        <div class="flex justify-between mx-auto">
+                            <div class="w-1/2">
+                                <label class="font-semibold">Name</label>
+                            </div>
+                            <div class="w-1/2">
+                                <p>: None</p>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="flex justify-between mx-auto">
+                            <div class="w-1/2">
+                                <label class="font-semibold">Email</label>
+                            </div>
+                            <div class="w-1/2">
+                                <p>: shariful@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <!-- Date of Birth -->
+                        <div class="flex justify-between mx-auto">
+                            <div class="w-1/2">
+                                <label class="font-semibold">Date Of Birthday</label>
+                            </div>
+                            <div class="w-1/2">
+                                <p>: None</p>
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="flex justify-between mx-auto">
+                            <div class="w-1/2">
+                                <label class="font-semibold">Phone</label>
+                            </div>
+                            <div class="w-1/2">
+                                <p>: 01996969696</p>
+                            </div>
+                        </div>
+
+                        <!-- Address -->
+                        <div class="flex justify-between mx-auto">
+                            <div class="w-1/2">
+                                <label class="font-semibold">Address</label>
+                            </div>
+                            <div class="w-1/2">
+                                <p>: None</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-content hidden lg:pt-6 lg:px-6 p-1">
+                <h1 class="text-2xl  font-bold mb-2">Return Product</h1>
+                <!-- Product List -->
+                <div class="space-y-4">
+                    <!-- Single Product Item -->
+                    <div class="flex items-center justify-between bg-white p-4 rounded-lg shadow-md">
+                        <div class="flex items-center">
+                            <!-- Product Image -->
+                            <img src="https://via.placeholder.com/50" alt="Product Image"
+                                class="w-16 h-16 object-cover rounded-lg">
+                            <!-- Product Details -->
+                            <div class="ml-4">
+                                <h3 class="text-lg font-semibold text-gray-800">Product Name</h3>
+                                <p class="text-gray-600">Price: $20.00</p>
+                            </div>
+                        </div>
+                        <!-- Quantity Selector -->
+                        <div class="flex items-center space-x-2">
+                            <label for="quantity" class="text-gray-600">Qty:</label>
+                            <input type="number" id="quantity" value="1" min="1"
+                                class="w-16 px-2 py-1 border rounded-lg text-center">
+                        </div>
+                    </div>
+
+                    <!-- Repeat above block for more products -->
+                </div>
+            </div>
+            <div class="tab-content hidden lg:pt-6 lg:px-6 p-1">
+                <div class="w-full md:w-1/2 shadow-lg py-5 rounded-lg mx-auto">
+                    <h5 class="mb-5 text-center text-xl font-semibold">Change Password</h5>
+                    <form action="{% url 'change_password' %}" class="p-6" method="post">
+                        {% csrf_token %}
+                        <!-- Current Password -->
+                        <div class="mb-4">
+                            <label for="oldPassword" class="block text-sm font-medium text-gray-700">Current
+                                Password
+                                <sup class="ml-1 text-red-500">*</sup>
+                            </label>
+                            <input type="password"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:ring-blue-500"
+                                name="old_password" id="oldPassword" placeholder="Current password" required="">
+                        </div>
+                        <!-- New Password -->
+                        <div class="mb-4">
+                            <label for="newPassword1" class="block text-sm font-medium text-gray-700">New Password
+                                <sup class="ml-1 text-red-500">*</sup>
+                            </label>
+                            <input type="password"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-0 focus:ring-blue-500"
+                                name="new_password1" id="newPassword1" placeholder="New password" required="">
+                        </div>
+                        <!-- Confirm Password -->
+                        <div class="mb-4">
+                            <label for="newPassword2" class="block text-sm font-medium text-gray-700">Confirm
+                                Password
+                                <sup class="ml-1 text-red-500">*</sup>
+                            </label>
+                            <input type="password"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                name="new_password2" id="newPassword2" placeholder="Confirm password" required="">
+                        </div>
+                        <!-- Submit Button -->
+                        <div class="text-center">
+                            <button type="submit"
+                                class="w-full py-2 thembg1 text-white rounded-full  focus:outline-none focus:ring-1 focus:ring-red-500">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<!-- user profile dashbord end-->
+
+{% endblock content %}

@@ -1,0 +1,182 @@
+{% extends "dashboard/base.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block content %}
+    
+  <!-- table section -->
+  <div class="mt-  ">
+    <div class="px-4 py-6 shadow-lg bg-white">
+
+        <div class="bg-white  rounded-lg ">
+            <!-- Wrapper with restricted width and overflow handling -->
+            <div class="max-w-full overflow-hidden rounded-lg  bg-white">
+                <!-- Add a scrollable container for mobile -->
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto text-sm">
+                        <thead class="bg-gray-100">
+                            <tr class="text-gray-600">
+                                <th class="text-left px-4 py-2">ID</th>
+                                <th class="text-left px-4 py-2">Sl no</th>
+                                <th class="text-left px-4 py-2">Name</th>
+                                <th class="text-left px-4 py-2">Parent</th>
+                                <th class="text-left px-4 py-2">Iogoa</th>
+                                <th class="text-left px-4 py-2">Actions</th>
+                                <th class="text-left px-4 py-2"></th>
+                            </tr>
+                        </thead>
+                        <tboday>
+                            {% for obj in query %}
+                            <tr class="border-t hover:bg-gray-200 text-gray-700">
+                                <td class="px-4 py-2">{{ obj.id }}</td>
+                                <td class="px-4 py-2">{{ forloop.counter }}</td>
+                                <td class="px-4 py-2">{{ obj.name }}</td>
+                                <td class="px-4 py-2">{{ obj.location }}</td>
+                                <td class="px-4 py-2">
+                                    <img src="{{ obj.logo.url }}" alt="{{ obj.name }}" class="h-12 w-12 rounded-md">
+                                </td>
+                                <td class="px-4 py-2 flex items-center space-x-3 text-center">
+                                    <i class="fa-regular fa-eye p-2 cursor-pointer hover:text-blue-500" title="View"></i>
+                                    <i class="fa-solid fa-pencil p-2 cursor-pointer hover:text-blue-500" title="Edit" data-modal-target="edit-popup-modal" data-modal-toggle="edit-popup-modal"></i>
+                                    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block text-white" type="button">
+                                        <i class="fa-regular fa-trash-can p-2 cursor-pointer text-red-500 hover:text-red-700"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center text-gray-500 py-4">No websites available.</td>
+                            </tr>
+                            {% endfor %}
+                        </tboday>
+                        
+                    </table>
+                    <div class="flex flex-col items-center mt-5 md:flex-row">
+                        {% if query.has_previous %}
+                            <a href="?page={{ query.previous_page_number }}" class="inline-flex items-center justify-center bg-white h-8 px-3 transition-all duration-150 ease-linear border rounded text-slate-500 hover:text-blue-500 hover:bg-blue-50 focus:bg-blue-50 focus:text-blue-500">
+                                <i class="mr-1 size-4 rtl:rotate-180" data-lucide="chevron-left"></i> Prev
+                            </a>
+                        {% endif %}
+                        <div class="mb-4 grow md:mb-0 inline-flex items-center justify-center">
+                            <p class="text-slate-500">Showing <b>{{ query.number }}</b> of <b>{{ query.paginator.num_pages }}</b> Results</p>
+                        </div>
+                        {% if query.has_next %}
+                            <a href="?page={{ query.next_page_number }}" class="inline-flex items-center justify-center bg-white h-8 px-3 transition-all duration-150 ease-linear border rounded text-slate-500 hover:text-blue-500 hover:bg-blue-50 focus:bg-blue-50 focus:text-blue-500">
+                                Next <i class="ml-1 size-4 rtl:rotate-180" data-lucide="chevron-right"></i>
+                            </a>
+                            
+                        {% endif %}
+                        
+                    </div>
+                </div>
+                
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- Sorting and Status Filter -->
+
+
+    <!-- delete modal -->
+    <div id="popup-modal" tabindex="-1"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                    class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="popup-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4 md:p-5 text-center">
+                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you
+                        sure you want to delete this product?</h3>
+                    <button data-modal-hide="popup-modal" type="button"
+                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                        Yes, I'm sure
+                    </button>
+                    <button data-modal-hide="popup-modal" type="button"
+                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
+                        cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-popup-modal" tabindex="-1"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 left-0 right-0 z-50 justify-center items-center w-full md:inset-0 h-full max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <button type="button"
+                    class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="edit-popup-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4 md:p-5">
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Edit
+                        Product</h3>
+                    <form id="edit-form">
+                        <div class="mb-4">
+                            <label for="edit-name"
+                                class="block text-sm font-medium text-gray-700">Product Name</label>
+                            <input type="text" id="edit-name" name="edit-name"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                placeholder="Product Name">
+                        </div>
+                        <div class="mb-4">
+                            <label for="edit-description"
+                                class="block text-sm font-medium text-gray-700">Description</label>
+                            <input type="text" id="edit-description" name="edit-description"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                                placeholder="Product Description">
+                        </div>
+                        <div class="flex justify-end space-x-3">
+                            <button type="button" data-modal-hide="edit-popup-modal"
+                                class="py-2.5 px-5 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700">
+                                Cancel
+                            </button>
+                            <button type="submit"
+                                class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5">
+                                Save Changes
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Pagination -->
+    <div class="flex justify-between items-center mt-6">
+        <p class="text-gray-700">page 1 to 10 of 50 </p>
+        <div class="flex space-x-2">
+            <button
+                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Previous</button>
+            <button
+                class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300">Next</button>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

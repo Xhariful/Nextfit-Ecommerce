@@ -1,0 +1,24 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% load tailwind_filters %}
+
+{% block content %}
+
+    <div class=" font-sans drop-shadow-2xl">
+        <div class="m-4 bg-white p-8 rounded-xl shadow-lg">
+            <h2 class="text-2xl font-semibold  text-gray-800 mb-6">Add/Edit Coupon</h2>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                <div class="grid grid-cols-1 gap-x-4 md:grid-cols-2 xl:grid-cols-2">
+                    {{ form|crispy }}
+                </div>
+                <div class="relative">
+                    <input type="submit" class="absolute right-3 bottom-3 font-semibold bg-blue-500  text-white px-8 py-2 rounded-lg cursor-pointer" value="Submit">
+                </div>
+            </form>
+        </div><!--end card-->
+    </div>
+    <!-- container-fluid -->
+
+{% endblock content %}

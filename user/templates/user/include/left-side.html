@@ -1,0 +1,44 @@
+{% load static %}
+    <!-- Left Sidebar start -->
+    <div class="hidden lg:block lg:w-1/4 w-2/5 border-r p-5 shadow-lg">
+        <!-- Profile Section -->
+        <div class="flex flex-col items-center text-center space-y-3 mb-8">
+            <img src=" {{ request.user.profile.image.url }} " alt="User Profile" class="w-20 h-20 rounded-full">
+            <div>
+                <h2 class="text-lg font-semibold text-gray-700">{{ request.user.full_name }}</h2>
+                <p class="text-sm text-gray-500">{{ request.user }}</p>
+            </div>
+        </div>
+        <!-- Tabs Navigation -->
+        <nav class="space-y-1 text-sm">
+            <a href="{% url 'user_deshboard' %}"
+                class="tab-button block py-2 px-4 w-full text-left rounded hover:bg-blue-100 hover:text-blue-600">
+                Dashboard
+            </a>
+            <a href="{% url 'purchase_history' %}"
+                class="tab-button block py-2 px-4 w-full text-left rounded hover:bg-blue-100 hover:text-blue-600">
+                Purchase History
+            </a>
+            <a href="{% url 'my_review' %}"
+                class="tab-button block py-2 px-4 w-full text-left rounded hover:bg-blue-100 hover:text-blue-600">
+                My Review
+            </a>
+            <a href="{% url 'manage_profile' %}"
+                class="tab-button block py-2 px-4 w-full text-left rounded hover:bg-blue-100 hover:text-blue-600">
+                Manage Profile
+            </a>
+            <a href="{% url 'return_product' %}"
+                class="tab-button block py-2 px-4 w-full text-left rounded hover:bg-blue-100 hover:text-blue-600">
+                Return Product
+            </a>
+            <a href="{% url 'change_password_view' %}"
+                class="tab-button block py-2 px-4 w-full text-left rounded hover:bg-blue-100 hover:text-blue-600">
+                Change Password
+            </a>
+            <a href="{% url 'logout_view' %}"
+            class="tab-button block py-2 px-4 w-full text-left rounded text-red-600 hover:bg-red-100">
+                Logout
+            </a>
+        </nav>
+    </div>
+    <!-- Left Sidebar end -->

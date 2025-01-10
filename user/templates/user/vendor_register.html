@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block content %}
+
+<!-- vendor register start-->
+<section>
+    <div class=" container max-w-7xl mx-auto ">
+        <div class="grid lg:grid-cols-2 grid-cols-1 lg:mx-12 md:mx-6 mx-2 my-8 bg-white rounded-lg shadow-lg ">
+            <div class="text-center lg:mx-12 md:mx-10 mx-6">
+                <p class="themcolor1 font-semibold pb-2 lg:text-5xl md:text-3xl text-xl">Create a vendor account</p>
+                <div class="border border-gray-400 "></div>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {% comment %} {{ form.as_p }} {% endcomment %}
+                    <div class="grid lg:grid-cols-1 md:grid-cols-2 grid-cols-1 pt-8 lg:gap-y-6 gap-y-4 gap-x-4 ">
+                        <input class="rounded-lg focus:outline-none focus:ring-0" name="full_name" type="text" placeholder="Full name">
+                        <input class="rounded-lg focus:outline-none focus:ring-0" name="phone" type="tel" placeholder="Phone number">
+                        <input class="rounded-lg focus:outline-none focus:ring-0 lg:col-span-1 md:col-span-2" name="email" type="email" placeholder="E-mail address">
+                        <input class="rounded-lg focus:outline-none focus:ring-0" name="password1" type="password" placeholder="Password">
+                        <input class="rounded-lg focus:outline-none focus:ring-0" name="password2" type="password" placeholder="Confirm password">
+                        
+                    </div>
+                    <button type="submit" class="thembg1 w-full p-2 rounded-lg mt-4 ">
+                        Sign up
+                    </button>
+                </form>
+            <div class="text-center lg:text-lg text-sm py-2">
+                <p class="">If you have already an account? <a href=" {% url 'customer_register' %} " class="themcolor1">Customer register</a> now.</p>
+            </div>
+        </div>
+        <div class="hidden lg:block">
+            <img src="https://eranian.com/static/images/auth/sign_up.png" alt="">
+        </div>
+    </div>
+</section>
+<!-- vendor register start-->
+
+{% endblock content %}

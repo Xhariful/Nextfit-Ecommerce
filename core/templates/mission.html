@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="mt-20 mb-10 text-center">
+   <p class="text-4xl font-semibold theme-color-3">Our Mission</p>
+</div>
+
+<section class="bg-white">
+   <div class="border border-gray-200 max-w-7xl mx-auto">
+      <div class="p-6 bg-white rounded-lg shadow-md">
+        
+        {% if mission %}
+          <!-- Display Mission Description -->
+          <div class="mission-description">
+            <p class="text-lg text-justify text-gray-700 dark:text-gray-400">
+              {{ mission.description|safe }}  <!-- Render rich text description -->
+            </p>
+          </div>
+        {% else %}
+          <!-- Fallback message if no mission is available -->
+          <p class="text-lg text-justify text-gray-700 dark:text-gray-400">
+            Sorry, the mission description is currently unavailable.
+          </p>
+        {% endif %}
+      </div>
+   </div>
+</section>
+
+{% endblock %}

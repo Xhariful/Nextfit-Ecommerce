@@ -1,0 +1,237 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Checkout{% endblock title %}
+{% block content %}
+<!-- Checkout page start -->
+<div class="container max-w-7xl mx-auto lg:p-6 p-1">
+    <div class="lg:p-6 p-1 lg:mx-12">
+        <!-- Main Grid -->
+        <form method="POST" action="{% url 'checkout' %}" class="md:flex lg:p-6 p-1 md:gap-6 gap-2">
+            {% csrf_token %}
+            <!-- Billing and Shipping Section -->
+            <div class="md:w-1/2 shadow-lg p-4 border border-gray-200">
+                <p class="text-2xl py-2">Billing and Shipping</p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-2">
+                    <input 
+                        class="w-full rounded-lg px-3 py-2 focus:outline-none focus:ring-0" 
+                        type="text" 
+                        name="name" 
+                        placeholder="Name" 
+                        required>
+                    <input 
+                        class="w-full rounded-lg px-3 py-2 focus:outline-none focus:ring-0" 
+                        type="text" 
+                        name="phone" 
+                        placeholder="Phone" 
+                        required>
+                    <select 
+                        class="rounded-lg px-3 py-2 border focus:outline-none focus:ring-0" 
+                        name="type" 
+                        required>
+                        <option value="">Select City</option>
+                        <option value="Inside Dhaka">Inside Dhaka</option>
+                        <option value="Outside Dhaka">Outside Dhaka</option>
+                    </select>
+                    <select 
+                        class="rounded-lg px-3 py-2 border focus:outline-none focus:ring-0 bg-white text-gray-800" 
+                        name="area">
+                        <option value="">Select Area</option>
+                        <option value="Banani">Banani</option>
+                        <option value="Uttara">Uttara</option>
+                        <option value="Dhanmondi">Dhanmondi</option>
+                    </select>
+                    <input 
+                        class="rounded-lg border px-3 py-2 focus:outline-none focus:ring-0" 
+                        type="text" 
+                        name="address" 
+                        placeholder="Address" 
+                        required>
+                    <input 
+                        class="rounded-lg border px-3 py-2 focus:outline-none focus:ring-0" 
+                        type="email" 
+                        name="email" 
+                        placeholder="E-mail">
+                    <input 
+                        class="lg:col-span-2 rounded-lg border px-3 py-2 focus:outline-none focus:ring-0" 
+                        type="text" 
+                        name="order_note" 
+                        placeholder="Order Note (optional)">
+                </div>
+            </div>
+            <!-- Shipping and Payment Section -->
+            <div class="md:w-1/2 shadow-lg border border-gray-200 p-4">
+                <div class="lg:p-6 p-1">
+                    
+                    <button data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="block text-white thembg1 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                        Have a Coupon/Voucher?
+                    </button>
+                    
+                    
+    
+                    <p class="font-semibold">Choose Shipping Method</p>
+                    <div class="px-2">
+                        <!-- Shipping Options -->
+                        <div class="flex items-center mb-2 justify-between">
+                            <div>
+                                <input 
+                                    id="shipping-inside" 
+                                    type="radio" 
+                                    value="Inside Dhaka" 
+                                    name="type" 
+                                    checked
+                                    class="w-4 h-4" 
+                                    required>
+                                <label for="shipping-inside" class="ms-2 text-sm">Delivery Inside Dhaka</label>
+                                
+                            </div>
+                            <div>
+                                <p>TK 50</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center mb-2 justify-between">
+                            <div>
+                                <input 
+                                    id="shipping-outside" 
+                                    type="radio" 
+                                    value="Outside Dhaka" 
+                                    name="type"
+                                     
+                                    class="w-4 h-4" 
+                                    required>
+                                    <label for="shipping-outside" class="ms-2 text-sm">Delivery Outside Dhaka</label>
+                            </div>
+                            <div>
+                                <p>TK 99</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Total and Payment -->
+                    <div class="flex justify-between my-4">
+                        <div>Total MRP</div>
+                        <div data-con-total="{{ con_total|floatformat:1 }}">TK: {{ con_total|floatformat:1 }}</div>
+                    </div>
+                    <div class="flex justify-between my-4">
+                        <div>Coupon Discount Amount</div>
+                        <div data-discount-amount="{{ discount_amount|floatformat:1 }}">TK: -{{ discount_amount|floatformat:1 }}</div>
+                    </div>
+                    <div class="border border-black my-2"></div>
+                    <div class="flex justify-between">
+                        <div>Total Amount</div>
+                        <div data-final-total>TK: {{ final_total|floatformat:1 }}</div>
+                    </div>
+                    
+                    <p class="font-semibold mt-4">Choose Payment Method</p>
+                    <div>
+                        <input 
+                            id="payment-cash" 
+                            type="radio" 
+                            value="Cash on delivery" 
+                            name="payment_type"
+                            checked 
+                            class="w-4 h-4">
+                        <label for="payment-cash" class="ms-2 text-sm">Cash on Delivery</label>
+                    </div>
+                    <div>
+                        <input 
+                            id="payment-bkash" 
+                            type="radio" 
+                            value="Bkash" 
+                            name="payment_type"
+                            class="w-4 h-4">
+                        <label for="payment-bkash" class="ms-2 text-sm">bKash</label>
+                    </div>
+                </div>
+                <!-- Place Order Button -->
+                <div class="flex justify-center mx-auto mt-4">
+                    <button type="submit" 
+                        class="w-full lg:w-auto thembg1 text-white font-medium rounded-lg text-sm px-4 lg:px-10 py-2">
+                        Place Order
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="popup-modal" tabindex="-1" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <button type="button" class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="popup-modal">
+                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                </svg>
+                <span class="sr-only">Close modal</span>
+            </button>
+            <div class="p-4 md:p-5 text-center">
+            <form  action="{% url 'apply_coupon' %}" method="post">
+                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+                   
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.5 12A2.5 2.5 0 0 1 21 9.5V7a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v2.5a2.5 2.5 0 0 1 0 5V17a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1v-2.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+                      
+                      <!-- Dashed border for coupon -->
+                    
+                  </svg>
+                  
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apply your cupon</h3>
+                {% csrf_token %}
+                <input 
+                class="w-full rounded-lg px-3 py-2 focus:outline-none focus:ring-0 mb-4 text-center" 
+                type="text" 
+                name="coupon_code" 
+                placeholder="Enter Your Coupan Code" 
+                required>
+                <button data-modal-hide="popup-modal" type="submit" class="text-white hover:text-white bg-[#364e45] hover:bg-[#364e45] border border-gray-600 focus:ring-4 focus:outline-none focus:ring-red-300  font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                    Submit
+                </button>
+                <button data-modal-hide="popup-modal" type="button" class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-red-600 hover:text-white focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
+            </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    // Get elements for shipping options and total amounts
+    const shippingInsideInput = document.getElementById("shipping-inside");
+    const shippingOutsideInput = document.getElementById("shipping-outside");
+    const conTotalElement = document.querySelector("[data-con-total]"); // Assuming you have an element to store cart total
+    const discountAmountElement = document.querySelector("[data-discount-amount]");
+    const finalTotalElement = document.querySelector("[data-final-total]");
+
+    // Extract initial amounts
+    const baseTotal = parseFloat(conTotalElement.getAttribute("data-con-total")); // Cart total
+    const discountAmount = parseFloat(discountAmountElement.getAttribute("data-discount-amount")); // Discount amount
+    const insideDhakaCharge = 50.0;
+    const outsideDhakaCharge = 99.0;
+
+    // Function to update final total
+    function updateFinalTotal(shippingCharge) {
+        const finalTotal = baseTotal - discountAmount + shippingCharge;
+        finalTotalElement.textContent = `TK: ${finalTotal.toFixed(1)}`;
+    }
+
+    // Event listeners for shipping method changes
+    shippingInsideInput.addEventListener("change", function () {
+        if (shippingInsideInput.checked) {
+            updateFinalTotal(insideDhakaCharge);
+        }
+    });
+
+    shippingOutsideInput.addEventListener("change", function () {
+        if (shippingOutsideInput.checked) {
+            updateFinalTotal(outsideDhakaCharge);
+        }
+    });
+
+    // Initialize the final total with the default selected shipping option
+    if (shippingInsideInput.checked) {
+        updateFinalTotal(insideDhakaCharge);
+    } else if (shippingOutsideInput.checked) {
+        updateFinalTotal(outsideDhakaCharge);
+    }
+});
+
+</script>
+<!-- Checkout page end -->
+{% endblock content %}

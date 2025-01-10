@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block content %}
+
+    <!-- login start -->
+    <div class="flex justify-center items-center md:h-screen  ">
+        <div class="bg-white my-10 p-6 rounded-lg shadow-lg w-full max-w-md border border-gray-200">
+            <div class="text-center">
+                <p class="themcolor1 font-semibold pb-2 lg:text-5xl md:text-3xl text-xl mb-2">Log In</p>
+                <div class="border border-black mb-6"></div>
+                <form method="post" action="" class="m-4">
+                    {% csrf_token %}
+                <div class="flex flex-col gap-y-4">
+                        <input class="rounded-lg p-2 focus:outline-none focus:ring-0 ]" name='email' type="email"
+                            placeholder="E-mail address">
+                        <input class="rounded-lg p-2 focus:outline-none focus:ring-0" name='password' type="password"
+                            placeholder="Password">
+                        <button type="submit" class="thembg1 text-white p-2 rounded-lg">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+                <div class="">
+                    <a class="text-black block mt-4" href="#">Forgotten password?</a>
+                    <a href="#" class="flex items-center justify-center  thembg1 p-[5px] rounded-lg  mt-4 mx-4 ">
+                        <i class="fa-brands fa-google text-xl mx-2"></i>Login with Google
+                    </a>
+                </div>
+            </div>
+            <div class="text-center lg:text-lg text-sm py-4">
+                <p>Don't have an account?
+                    <a href="{% url 'customer_register' %}" class="themcolor1">Sign Up</a> now.
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- login end -->
+
+{% endblock content %}

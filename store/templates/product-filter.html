@@ -1,0 +1,358 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}product-details{% endblock title %}
+{% block content %}
+    <!-- product filter start -->
+    <section>
+        <div class="container max-w-8xl mx-auto">
+            <div class="md:flex  p-4 gap-3">
+                <!-- Left side view start -->
+                <div class="w-full hidden lg:block lg:w-3/12 h-screen overflow-y-auto ">
+                    <div class="w-full">
+                        <p class="lg:text-2xl md:text-xl font-semibold text-center thembg1 p-1 rounded-md">Product Categories</p>
+                        <ul class="flex flex-col justify-items-center gap-2  mx-auto mt-1">
+                            {% for category in categories %}
+                            <li>
+                                <details class="group" {% if selected_category and selected_category.id == category.id %}open{% endif %}>
+                                    <summary
+                                        class="flex items-center justify-between bg-blue-100 rounded-lg gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
+                                        <a href="{% url 'product_filter' %}?category={{ category.id }}" 
+                                           class="text-blue-600 {% if selected_category and selected_category.id == category.id %}font-bold text-red-500{% endif %} hover:underline">
+                                            {{ category.name }}
+                                        </a>
+                                        {% if category.children.exists %}
+                                        <svg class="w-5 h-5 text-black transition group-open:rotate-90"
+                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd"
+                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                                            </path>
+                                        </svg>
+                                        {% endif %}
+                                    </summary>
+                                    {% if category.children.exists %}
+                                    <article class="bg-blue-100 rounded-b-lg mx-1 px-3 pb-1">
+                                        <ul class="flex flex-col p-1 font-semibold">
+                                            {% for child in category.children.all %}
+                                            <li>
+                                                <details class="group" {% if selected_category and selected_category.id == child.id %}open{% endif %}>
+                                                    <summary
+                                                        class="flex items-center justify-between rounded-lg gap-2 font-medium marker:content-none hover:cursor-pointer">
+                                                        <a href="?category={{ child.id }}" 
+                                                           class="text-blue-600 {% if selected_category and selected_category.id == child.id %}font-bold text-red-500{% endif %} hover:underline">
+                                                            {{ child.name }}
+                                                        </a>
+                                                        {% if child.children.exists %}
+                                                        <svg class="w-4 h-4 text-gray-600 transition group-open:rotate-90"
+                                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                                                            </path>
+                                                        </svg>
+                                                        {% endif %}
+                                                    </summary>
+                                                    {% if child.children.exists %}
+                                                    <article class="bg-gray-100 rounded-lg px-4 pb-1">
+                                                        <ul class="flex flex-col p-2 font-normal">
+                                                            {% for subchild in child.children.all %}
+                                                            <li>
+                                                                <a href="?category={{ subchild.id }}" 
+                                                                   class="text-blue-600 {% if selected_category and selected_category.id == subchild.id %}font-bold text-red-500{% endif %} hover:underline">
+                                                                    {{ subchild.name }}
+                                                                </a>
+                                                            </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </article>
+                                                    {% endif %}
+                                                </details>
+                                            </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </article>
+                                    {% endif %}
+                                </details>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        
+                        
+                        
+
+                        <p class="lg:text-2xl md:text-xl font-semibold text-center thembg1 p-1 mt-2 rounded-md ">Brands Categories</p>
+                        <ul class="flex flex-col gap-2 w-full mx-auto mt-1">
+                            {% for brand in brands %}
+                            <li class="bg-blue-100 rounded-lg gap-2 p-2" >
+                                <a href="?brand={{ brand.id }}" 
+                                   class="text-blue-600 {% if selected_brand and selected_brand.id == brand.id %}font-bold text-red-500{% endif %} hover:underline">
+                                    {{ brand.name }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        
+                            
+                        </ul>
+                        <!-- price filter start -->
+                        <div class="mb-4">
+                            <p class="lg:text-2xl md:text-xl font-semibold text-center thembg1 p-1 mt-2 rounded-md ">Price Categories</p>
+                            <!-- Price Filter -->
+                            <form class="w-3/12 m-2" action="" method="get">
+                                {% csrf_token %}
+                                <div class="flex justify-items-between ">
+                                    <input type="number" name="min_price" placeholder="Min Price" value="{{ min_price }}" class="w-40 border rounded p-2">
+                                    <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}" class="w-40 border rounded p-2">
+                                </div>
+                                <button class="text-center thembg1 w-full text-white rounded p-2 mt-2" type="submit">Filter</button>
+                            </form>
+                            <!-- price filter end -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- mobile categories filter start-->
+                
+                 <!-- drawer component -->
+                 <div id="drawer-bottom-example" class="block lg:hidden fixed bottom-0 left-0 right-0 z-40 lg:h-96 h-80 p-2 overflow-y-auto transition-transform bg-white translate-y-full" tabindex="-1" aria-labelledby="drawer-bottom-label" aria-hidden="true">
+                     <h5 id="drawer-bottom-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500">
+                         <i class="fa-solid fa-filter"></i>
+                         Product Filter
+                     </h5>
+                     <button type="button" data-drawer-hide="drawer-bottom-example" aria-controls="drawer-bottom-example" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center">
+                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                         </svg>
+                         <span class="sr-only">Close menu</span>
+                     </button>
+                     <div class="container mx-auto">
+                        <div class="flex">
+                            <!-- all navtab button div -->
+                            <div class="w-2/6 sticky top-0 h-fit border lg:p-4 overflow-y-auto">
+                                <ul class="lg:text-xl text-center">
+                                    <li class="thembg1 rounded-sm py-1 px-2 my-2 cursor-pointer tab-button" data-tab="categories">Categories</li>
+                                    <li class="thembg1 rounded-sm py-1 px-2 my-2 cursor-pointer tab-button" data-tab="brands">Brands</li>
+                                    <li class="thembg1 rounded-sm py-1 px-2 my-2 cursor-pointer tab-button" data-tab="price">Price</li>
+                                
+                                </ul>
+                            </div>
+                            <!-- all navtab data here -->
+                            <div class="w-4/6 border lg:p-4 px-1 overflow-y-auto">
+                                <div class="tab-content" id="categories">
+                                    <h2 class="lg:text-2xl font-semibold">Categories</h2>
+                                    <ul class="flex flex-col justify-items-center gap-2 mx-auto mt-1">
+                                        {% for category in categories %}
+                                        <li>
+                                            <details class="group" {% if selected_category and selected_category.id == category.id %}open{% endif %}>
+                                                <summary
+                                                    class="flex items-center justify-between bg-blue-100 rounded-lg gap-2 p-2 font-medium marker:content-none hover:cursor-pointer">
+                                                    <a href="?category={{ category.id }}" 
+                                                       class="text-blue-600 {% if selected_category and selected_category.id == category.id %}font-bold text-red-500{% endif %} hover:underline">
+                                                        {{ category.name }}
+                                                    </a>
+                                                    {% if category.children.exists %}
+                                                    <svg class="w-5 h-5 text-black transition group-open:rotate-90"
+                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd"
+                                                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                                                        </path>
+                                                    </svg>
+                                                    {% endif %}
+                                                </summary>
+                                                {% if category.children.exists %}
+                                                <article class="bg-blue-100 rounded-lg px-4 pb-1">
+                                                    <ul class="flex flex-col p-2 font-semibold">
+                                                        {% for child in category.children.all %}
+                                                        <li>
+                                                            <details class="group" {% if selected_category and selected_category.id == child.id %}open{% endif %}>
+                                                                <summary
+                                                                    class="flex items-center justify-between rounded-lg gap-2 font-medium marker:content-none hover:cursor-pointer">
+                                                                    <a href="?category={{ child.id }}" 
+                                                                       class="text-blue-600 {% if selected_category and selected_category.id == child.id %}font-bold text-red-500{% endif %} hover:underline">
+                                                                        {{ child.name }}
+                                                                    </a>
+                                                                    {% if child.children.exists %}
+                                                                    <svg class="w-4 h-4 text-gray-600 transition group-open:rotate-90"
+                                                                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z">
+                                                                        </path>
+                                                                    </svg>
+                                                                    {% endif %}
+                                                                </summary>
+                                                                {% if child.children.exists %}
+                                                                <article class="bg-gray-100 rounded-lg px-4 pb-1">
+                                                                    <ul class="flex flex-col p-2 font-normal">
+                                                                        {% for subchild in child.children.all %}
+                                                                        <li>
+                                                                            <a href="?category={{ subchild.id }}" 
+                                                                               class="text-blue-600 {% if selected_category and selected_category.id == subchild.id %}font-bold text-red-500{% endif %} hover:underline">
+                                                                                {{ subchild.name }}
+                                                                            </a>
+                                                                        </li>
+                                                                        {% endfor %}
+                                                                    </ul>
+                                                                </article>
+                                                                {% endif %}
+                                                            </details>
+                                                        </li>
+                                                        {% endfor %}
+                                                    </ul>
+                                                </article>
+                                                {% endif %}
+                                            </details>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="tab-content hidden" id="brands">
+                                    <h2 class="lg:text-2xl font-semibold">Brands</h2>
+                                    <ul class="flex flex-col justify-items-center items-center gap-2 mx-auto ">
+                                        {% for brand in brands %}
+                                        <li class="bg-blue-100 rounded-lg p-2 w-full text-center" >
+                                            <a href="?brand={{ brand.id }}" 
+                                            class="text-blue-600 {% if selected_brand and selected_brand.id == brand.id %}font-bold text-red-500{% endif %} hover:underline">
+                                                {{ brand.name }}
+                                            </a>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                                <div class="tab-content hidden" id="price">
+                                    <h2 class="lg:text-2xl font-semibold">Price</h2>
+                                    <form class="w-full m-2" action="" method="get">
+                                        
+                                        <div class="flex justify-items-between ">
+                                            <input type="number" name="min_price" placeholder="Min Price" value="{{ min_price }}" class="w-40 border rounded p-2">
+                                            <input type="number" name="max_price" placeholder="Max Price" value="{{ max_price }}" class="w-40 border rounded p-2">
+                                        </div>
+                                        <button class="text-center thembg1 w-full text-white rounded p-2 mt-2" type="submit">Filter</button>
+                                    </form>
+                                </div>
+                            </div>
+                            
+                            <!-- navtab js  -->
+                            <script>
+                                // Select all tab buttons
+                                const tabButtons = document.querySelectorAll(".tab-button");
+                            
+                                // Add click event listeners to each tab button
+                                tabButtons.forEach(button => {
+                                    button.addEventListener("click", () => {
+                                        // Remove 'hidden' class from the selected tab content
+                                        const tabId = button.getAttribute("data-tab");
+                                        const allTabs = document.querySelectorAll(".tab-content");
+                            
+                                        // Hide all tab contents
+                                        allTabs.forEach(tab => tab.classList.add("hidden"));
+                            
+                                        // Show the selected tab content
+                                        document.getElementById(tabId).classList.remove("hidden");
+                                    });
+                                });
+                            </script>
+                        </div>
+   
+                    </div>
+                 </div>
+
+                <!-- mobile categories filter end-->
+                <!-- Left side view end -->
+
+
+                <!-- Right side view start -->
+                <div class="w-full lg:w-9/12 ">
+                    <p class="text-2xl font-bold px-6 mt-4">All Product</p>
+
+                    <div class="text-end lg:hidden block ">
+                        <button class="text-white thembg1 focus:ring-0 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 focus:outline-none" type="button" data-drawer-target="drawer-bottom-example" data-drawer-show="drawer-bottom-example" data-drawer-placement="bottom" aria-controls="drawer-bottom-example">
+                           Product Filter
+                           <i class="fa-solid fa-filter"></i>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:p-2 p-1 justify-items-center gap-1">
+                        <!-- cards start -->
+                        {% for i in products %}
+                        <div class="lg:p-4 p-3 relative">
+                            <div
+                                class="w-full max-w-sm bg-white border border-gray-200 relative inline-block group rounded-lg shadow hover:bg-blue-100 ">
+                                <span class="thembg3 px-2 py-1 absolute top-0 left-0 text-xs rounded-md">
+                                    5.5% OFF
+                                </span>
+                                <a href="{% url 'wishlist' slug=i.slug %}"
+                                    class="thembg2 text-white text-center px-2 py-1 absolute top-0 right-0 text-xs rounded-md z-20 hidden group-hover:block m-2">
+                                    <i class="w-8 h-8 text-2xl fa-solid fa-heart  "></i>
+                                </a>
+                                <div class="flex justify-center z-10 ">
+                                    <a href="{% url 'product_detail' i.slug %}">
+                                        <div class="w-full overflow-hidden  rounded-t-lg"> <!-- Set 1:1 aspect ratio -->
+                                            <img class="w-full aspect-square hover:scale-110 overflow-hidden hover:z-0 text-center   object-cover"
+                                                src="{{ i.img.url }}"
+                                                alt="product image" />
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="lg:p-4 p-2">
+                                    <a href="{% url 'product_detail' i.slug %}">
+                                        <span class="text-sm lg:text-md font-semibold tracking-tight text-black-900 text-center">
+                                            {{ i.name|truncatechars:28 }}
+                                        </span>
+                                    </a>
+                                    <div class="flex items-center mt-2 justify-center mb-3">
+                                        <div class="flex items-center space-x-1 rtl:space-x-reverse">
+                                            <!-- Star rating SVGs -->
+                                            <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                            </svg>
+                                            <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                            </svg>
+                                            <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                            </svg>
+                                            <svg class="lg:w-4 w-4 lg:h-4 text-yellow-300" xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                            </svg>
+                                            <svg class="lg:w-4 w-4 lg:h-4 text-gray-200" xmlns="http://www.w3.org/2000/svg"
+                                                fill="currentColor" viewBox="0 0 24 24">
+                                                <path
+                                                    d="M12 .587l3.668 7.431 8.332 1.209-6.041 5.879 1.425 8.294L12 18.896 4.616 23.4l1.425-8.294L0 9.227l8.332-1.209L12 .587z" />
+                                            </svg>
+                                        </div>
+                                        <span
+                                            class="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ms-3">5.0</span>
+                                    </div>
+                                    <div class="flex justify-center gap-4  text-sm font-bold text-black">
+                                        {% if i.discount_price %}
+                                        <span>${{ i.discount_price }}</span>
+                                        <span class="line-through">${{ i.price }}</span>
+                                        {% else %}
+                                        <span class="line-through">${{ i.price }}</span>
+                                        {% endif %}
+                                        
+                                    </div>
+                                    <div class="flex justify-center items-end absolute bottom-0 left-0 w-full p-1">
+                                        <a href="{% url 'product_detail' i.slug %}"
+                                            class="w-full text-white thembg1 focus:ring-1 focus:outline-none font-medium rounded-lg lg:text-xs text-xs lg:px-8 md:px-3 px-2 lg:py-2 md:py-2 py-1 text-center ">Quick
+                                            View</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <!-- Right side view end -->
+            </div>
+        </div>
+    </section>
+    <!-- product filter end -->
+
+    {% endblock content %}
+   

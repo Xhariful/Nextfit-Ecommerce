@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}home{% endblock title %}
+{% block content %}
+
+<!-- user profile dashboard start -->
+<div class="container mx-auto max-w-7xl">
+    <div class="flex ">
+        <!-- Left Sidebar -->
+        {% include "user/include/left-side.html" %}
+
+        <!-- right side  -->
+        <div class="lg:w-3/4  lg:m-8  shadow-lg">
+            <!--my review -->
+            <div class="tab-content lg:pt-6 lg:px-6 p-1">
+                <h1 class="text-2xl  font-bold mb-2">My Review</h1>
+                <div class="mt-4 min-w-0 flex-1 space-y-4 sm:mt-0">
+                    <p class="text-base font-normal text-gray-500 dark:text-gray-400">My old IMAC was from 2013.
+                        This replacement was well needed. Very fast, and the colour matches my office set up
+                        perfectly. The display is out of this world and I’m very happy with this purchase.</p>
+
+                    <div class="flex items-center gap-4">
+                        <p class="text-sm font-medium text-gray-500 dark:text-gray-400">Was it helpful to you?</p>
+                        <div class="flex items-center">
+                            <input id="reviews-radio-1" type="radio" value="" name="reviews-radio"
+                                class="h-4 w-4 border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
+                            <label for="reviews-radio-1"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Yes: 3 </label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="reviews-radio-2" type="radio" value="" name="reviews-radio"
+                                class="h-4 w-4 border-gray-300 bg-gray-100 text-primary-600 focus:ring-2 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-primary-600" />
+                            <label for="reviews-radio-2"
+                                class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">No: 0 </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

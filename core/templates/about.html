@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<section class="about-us py-[40px] max-[767px]:py-[30px]">
+    <div class="flex flex-wrap justify-center items-center mx-auto">
+        <!-- Section Title -->
+        <div class="section-title-2 w-full mb-[20px] pb-[20px] flex flex-col justify-center items-center">
+            <h2 class="gi-title mb-[0] font-manrope text-[26px] font-semibold text-[#4b5966]">About Us</h2>
+            <p class="max-w-[400px] mt-[15px] text-[14px] text-[#777] text-center leading-[23px]">
+                Learn more about our vision, mission, and goals.
+            </p>
+        </div>
+
+        <!-- About Us Content -->
+        <div class="w-full px-[12px] py-[12px]">
+            {% if obj %}
+                <!-- Loop through AboutUs content (although it's one entry in this case) -->
+                {% for about in obj %}
+                    <div class="gi-box h-full p-[24px] border-[1px] border-solid border-[#eee] bg-[#f8f8fb] relative rounded-[5px]">
+                        <div class="detail flex flex-col justify-center items-center text-center">
+                            <!-- Display the rich text content -->
+                            <div class="about-description text-[16px] text-[#4b5966]">
+                                {{ about.description|safe }}  <!-- Using safe to render HTML -->
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center text-[14px] text-[#777]">No about us information available.</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+
+
+
+
+
+{% comment %} {% extends "base.html" %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<div class="mt-20 mb-10 text-center">
+   <p class="text-4xl font-semibold theme-color-3">About Us</p>
+</div>  
+
+<section class="bg-white">
+   <div class="border border-gray-200 max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 p-6">
+        
+        {% for item in obj %}
+        <div class="col-span-2">
+           <div class="w-full overflow-hidden justify-items-center self-center transition-all duration-300 cursor-pointer rounded-lg">
+              <img class="hover:scale-[1.02] rounded-lg w-full h-[420px]"
+                 src="{{ item.img.url }}" alt="{{ item.name }}"> <!-- Alt text set to item.name -->
+           </div>
+        </div>
+        
+        <div class="col-span-2">
+           <div class="bg-white p-4 rounded-lg shadow-md">
+              <p class="text-xl text-center font-bold">{{ item.name }}</p> <!-- Dynamic name -->
+              <p class="text-l text-gray-500 text-justify">{{ item.description|safe }}</p> <!-- Dynamic description -->
+           </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-gray-600">No information available at the moment.</p>
+        {% endfor %}
+
+      </div>
+   </div>
+</section>  
+
+{% endblock %} {% endcomment %}
